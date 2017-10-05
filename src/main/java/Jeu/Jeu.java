@@ -17,7 +17,7 @@ public abstract class Jeu {
 
 		nomJeu = "defaut";
 		this.mode = mode;
-		this.essai = 5;// A FIXER DANS LE FICHIER DE PARAMETRE
+		this.essai = 8;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
 	}
 

@@ -12,7 +12,7 @@ public abstract class Combinaison {
 	public Combinaison() {
 		// TODO Auto-generated constructor stub
 		this.comb = new ArrayList<Integer>();
-		this.nbCase = 5;// A MODIFIER APRES INTEGRATION DU FICHIER CONFIG
+		this.nbCase = 3;// A MODIFIER APRES INTEGRATION DU FICHIER CONFIG
 
 		// En fonction du nombre de cases définies dans le fichier on crée une
 		// combinaison aléatoire par défaut
@@ -26,6 +26,12 @@ public abstract class Combinaison {
 	public void ReSet(Joueur j) {
 
 	}
+	
+	public void ReSet(Joueur j,ArrayList<String> l) {
+
+	}
+	
+	
 
 	public String toString() {
 		String str = "";
