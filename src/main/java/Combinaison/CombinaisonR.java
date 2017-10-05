@@ -17,7 +17,7 @@ public class CombinaisonR extends Combinaison {
 	}
 
 	public void ReSet(Joueur j) {
-		if (j.getClass().getName() == "User") {
+		if (j.getClass().getName() == "Joueur.User") {
 			reset.SetComb(this);
 		} else
 			reset2.SetComb(this);
