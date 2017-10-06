@@ -1,5 +1,7 @@
 package Jeu;
 
+import javafx.beans.binding.When;
+
 public class Partie {
 
 	Jeu jeu;
@@ -46,11 +48,11 @@ public class Partie {
 			while (true) {
 				this.jeu.DemarrerJeu();
 				this.jeu2.DemarrerJeu();
-				if (this.jeu.statut == 3 || this.jeu.statut == 4 || this.jeu2.statut == 3 || this.jeu2.statut == 4)
+				if (this.jeu.statut == 4 || this.jeu.statut == 5 || this.jeu2.statut == 5 || this.jeu2.statut == 5)
 					break;
 				else {
-					this.jeu.statut = 1;
-					this.jeu.statut = 1;
+					this.jeu.statut = 2;
+					this.jeu.statut = 2;
 
 				}
 			}
@@ -58,10 +60,12 @@ public class Partie {
 		} else {
 			while (true) {//Mode Challenger ou défenseur
 				this.jeu.DemarrerJeu();
-				if (this.jeu.statut == 3 || this.jeu.statut == 4)
-					break;
-				else
-					this.jeu.statut = 1;
+				
+				if (this.jeu.statut == 5||this.jeu.statut==4) {
+					System.out.println("La partie est finie.");
+					break;}
+				
+				
 			}
 		}
 
