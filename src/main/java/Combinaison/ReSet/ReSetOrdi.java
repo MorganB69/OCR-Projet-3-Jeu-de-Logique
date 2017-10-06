@@ -19,33 +19,22 @@ public class ReSetOrdi implements ReSet {
 	public void SetComb(Combinaison c,ArrayList<String> j) {
 		for (int i = 0; i < c.getNbCase(); i++) {
 			
-			int[] max = new int[c.getNbCase()];
-			int[] min = new int[c.getNbCase()];
-			for (int k = 0; k < c.getNbCase(); k++) {
-				max[k]=9;
-				min[k]=0;
-			}
+
 			
 		
 			
 			if (j.get(i)=="=") {
 				c.getComb().set(i,c.getComb().get(i));
 			}
-			else if (j.get(i)=="+") {
-				max[i]=c.getComb().get(i);
-				c.getComb().set(i, (int) (Math.random() * (max[i] - min[i] + 1 ) + min[i]));
-				for (int k = 0; k < c.getNbCase(); k++) {
-					max[k]=c.getComb().get(i);
-					
-				}
+			else if (j.get(i)=="-") {
+				c.max[i]=c.getComb().get(i)-1;
+				c.getComb().set(i, (int) (Math.random() * (c.max[i] - c.min[i] + 1 ) + c.min[i]));
+
 			}
 			else {
-				min[i]=c.getComb().get(i);
-				c.getComb().set(i, (int) (Math.random() * (max[i] - min[i] + 1) + min[i]));
-				for (int k = 0; k < c.getNbCase(); k++) {
-					
-					min[k]=c.getComb().get(i);
-				}
+				c.min[i]=c.getComb().get(i)+1;
+				c.getComb().set(i, (int) (Math.random() * (c.max[i] - c.min[i] + 1) + c.min[i]));
+
 			}
 			
 		}

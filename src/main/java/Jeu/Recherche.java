@@ -10,6 +10,7 @@ import Joueur.User;
 public class Recherche extends Jeu {
 	ArrayList<String> resultat = new ArrayList<String>();
 
+
 	public Recherche(Mode mode) {
 		super(mode);
 		this.target = new CombinaisonR();
@@ -35,11 +36,11 @@ public class Recherche extends Jeu {
 				resultat.add(i, "=");
 			} else {
 				if (target.getComb().get(i) < reponse.getComb().get(i)) {
-					System.out.print("+");
-					resultat.add(i, "+");
-				} else {
 					System.out.print("-");
 					resultat.add(i, "-");
+				} else {
+					System.out.print("+");
+					resultat.add(i, "+");
 				}
 			}
 		}

@@ -8,6 +8,8 @@ public abstract class Combinaison {
 
 	ArrayList<Integer> comb;
 	int nbCase;
+	public int[]max;
+	public int[]min;
 
 	public Combinaison() {
 		// TODO Auto-generated constructor stub
@@ -18,6 +20,15 @@ public abstract class Combinaison {
 		// combinaison aléatoire par défaut
 		for (int i = 0; i < nbCase; i++) {
 			comb.add(i, (int) (Math.random() * (9 - 0) + 0));
+		}
+		
+		this.max= new int[nbCase];
+		this.min=new int[nbCase];
+		
+		
+		for (int i=0;i<nbCase;i++) {
+			this.max[i]=9;
+			this.min[i]=0;
 		}
 
 	}

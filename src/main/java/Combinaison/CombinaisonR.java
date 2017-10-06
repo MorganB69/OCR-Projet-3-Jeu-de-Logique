@@ -10,11 +10,14 @@ public class CombinaisonR extends Combinaison {
 
 	ReSetUser reset;
 	ReSetOrdi reset2;
+	int[]max;
+	int[]min;
 
 	public CombinaisonR() {
 		super();
 		this.reset = new ReSetUser();
 		this.reset2 = new ReSetOrdi();
+		
 
 	}
 
