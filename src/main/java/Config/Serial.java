@@ -1,3 +1,4 @@
+package Config;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -24,13 +25,13 @@ public class Serial {
 		this.d = d;
 	}
 
-	public void Ecriture(int val) {
+	public void Ecriture(ArrayList<Integer> l) {
 		try {
 			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.d,this.p))));
 
-			// for (int i=0;i<l.size();i++) {
-			oos.writeInt(val);
-			// }
+			for (int i=0;i<l.size();i++) {
+			oos.writeInt(l.get(i));
+			}
 
 			oos.close();
 
@@ -87,4 +88,54 @@ public class Serial {
 		
 	}
 
+	public ArrayList<Integer> Recuperation() {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		try {
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
+			
+			while(ois.available()>0) {
+			list.add(ois.readInt());
+			}
+			
+			
+
+
+		}
+
+		//catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+		//}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+
+		finally {
+			// On ferme nos flux de données dans un bloc finally pour s'assurer
+			// que ces instructions seront exécutées dans tous les cas même si
+			// une exception est levée !
+
+			try {
+				if (ois != null)
+					ois.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+		}
+		return list;
+		
+	
+		
+	}
+	
 }

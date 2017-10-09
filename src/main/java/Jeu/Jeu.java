@@ -1,10 +1,12 @@
 package Jeu;
 
 import Combinaison.Combinaison;
+import Config.JeuConfig;
 import Joueur.Joueur;
 
 public abstract class Jeu {
 	String nomJeu;
+	JeuConfig p;
 	int essai;
 	Combinaison target;
 	Combinaison target2;
@@ -22,9 +24,9 @@ public abstract class Jeu {
 	public Jeu(Mode mode) {
 
 		nomJeu = "defaut";
-		
+		this.p= new JeuConfig();
 		this.mode = mode;
-		this.essai = 5;// A FIXER DANS LE FICHIER DE PARAMETRE
+		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
 	}
 

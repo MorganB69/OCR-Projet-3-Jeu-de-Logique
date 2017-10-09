@@ -9,27 +9,30 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Serial s = new Serial("resources","config.properties");
 		
 		
 		
+	
 		
 		
-		//Jeu recherche= new Recherche(Mode.Duel);
-		//recherche.DemarrerJeu();
+		
+		Jeu recherche= new Recherche(Mode.Duel);
+		recherche.DemarrerJeu();
 		
 		
-		ArrayList<Integer> list= new ArrayList<Integer>();
-		int essai=5;
-		int nbCase=3;
-		int chiffre=4;
 
+
+
+		//ArrayList<Integer> listserial= new ArrayList<Integer>();
+		//int essai=5;
+		//int nbCase=3;
+		//int chiffre=4;
+		//listserial.add(0,essai);
+		//listserial.add(1,nbCase);
+		//listserial.add(2,chiffre);
 		
-		//s.Ecriture(essai);
-		//s.Ecriture(nbCase);
-		//s.Ecriture(chiffre);
-		
-		s.Lecture();
+		//s.Ecriture(listserial);
+
 		
 		
 	}

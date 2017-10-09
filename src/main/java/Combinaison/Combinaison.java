@@ -2,19 +2,24 @@ package Combinaison;
 
 import java.util.ArrayList;
 
+import Config.JeuConfig;
 import Joueur.Joueur;
 
 public abstract class Combinaison {
 
 	ArrayList<Integer> comb;
+	JeuConfig p;
 	int nbCase;
 	public int[]max;
 	public int[]min;
+	
 
 	public Combinaison() {
 		// TODO Auto-generated constructor stub
+		this.p= new JeuConfig();
 		this.comb = new ArrayList<Integer>();
-		this.nbCase = 3;// A MODIFIER APRES INTEGRATION DU FICHIER CONFIG
+		
+		this.nbCase = p.nbCase;// A MODIFIER APRES INTEGRATION DU FICHIER CONFIG
 
 		// En fonction du nombre de cases définies dans le fichier on crée une
 		// combinaison aléatoire par défaut
