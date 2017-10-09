@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonR;
+import Joueur.Joueur;
 import Joueur.Ordinateur;
 import Joueur.User;
 
 public class Recherche extends Jeu {
-	ArrayList<String> resultat = new ArrayList<String>();
-	ArrayList<String> resultat2 = new ArrayList<String>();
+
 
 	public Recherche(Mode mode) {
 		super(mode);
+		for(int i=0;i<p.nbCase;i++) this.resultat.add(i,"");
 		switch (mode) {
 		case Challenger:
 			this.attaquant = new User();
@@ -44,19 +45,22 @@ public class Recherche extends Jeu {
 
 	}
 
-	public void Verification(Combinaison target, Combinaison reponse) {
+	public void Verification(Combinaison target, Combinaison reponse, Joueur j) {
 		for (int i = 0; i < target.getNbCase(); i++) {
 
 			if (target.getComb().get(i) == reponse.getComb().get(i)) {
 				System.out.print("=");
-				resultat.add(i, "=");
+				if(j.getNom()=="Ordinateur")
+				this.resultat.set(i,"=");
 			} else {
 				if (target.getComb().get(i) < reponse.getComb().get(i)) {
 					System.out.print("-");
-					resultat.add(i, "-");
+					if(j.getNom()=="Ordinateur")
+					this.resultat.set(i, "-");
 				} else {
 					System.out.print("+");
-					resultat.add(i, "+");
+					if(j.getNom()=="Ordinateur")
+					this.resultat.set(i, "+");
 				}
 			}
 		}
@@ -64,9 +68,10 @@ public class Recherche extends Jeu {
 	}
 
 	public void DemarrerJeu() {
+		super.DemarrerJeu();
 		// Si on est au lancement du jeu, le défenseur définit la combinaison à
 		// chercher.
-		while(this.statut!=6) {
+		/*while(this.statut!=6) {
 		if (this.mode==Mode.Challenger||this.mode==Mode.Defenseur) {
 			
 		
@@ -240,7 +245,7 @@ public class Recherche extends Jeu {
 				
 				break;
 			}
-		}
+		}*/
 		}
 /*
 		if (this.statut == 0) {
@@ -279,6 +284,6 @@ public class Recherche extends Jeu {
 			}
 
 		}
-*/
-	}
+
+	}*/
 }
