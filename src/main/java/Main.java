@@ -10,9 +10,21 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-
-		Jeu recherche= new Recherche(Mode.Duel);
+		System.out.println("Bonjour, veuillez choisir un jeu");
+		System.out.println("--------------------------------");
+		System.out.println("1- Jeu Recherche");
+		System.out.println("2- Jeu Mastermind");
+		System.out.println("--------------------------------");
+		
+		
+		
+		Jeu recherche= new Recherche(Mode.Challenger);
+		
+		while(recherche.statut!=6) {
+		
+		Interface i=new Interface(recherche);
 		recherche.DemarrerJeu();
+		}
 		
 		
 

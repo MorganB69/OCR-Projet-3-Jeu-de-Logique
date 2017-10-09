@@ -20,7 +20,7 @@ public abstract class Jeu {
 	Joueur defenseur2;
 	
 	
-	int statut;
+	public int statut;
 	Mode mode;
 	ArrayList<String> resultat;
 	//ArrayList<String> resultat2 = new ArrayList<String>();
@@ -41,7 +41,7 @@ public abstract class Jeu {
 	}
 
 	public void DemarrerJeu() {
-		while(this.statut!=6) {
+		//while(this.statut!=6) {
 			if (this.mode==Mode.Challenger||this.mode==Mode.Defenseur) {
 				
 			
@@ -229,7 +229,7 @@ public abstract class Jeu {
 					break;
 				}
 			}
-	}
+	//}
 
 }
 }

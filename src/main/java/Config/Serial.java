@@ -73,9 +73,7 @@ public class Serial {
 		}
 
 		finally {
-			// On ferme nos flux de données dans un bloc finally pour s'assurer
-			// que ces instructions seront exécutées dans tous les cas même si
-			// une exception est levée !
+			// On ferme nos flux de données dans un bloc finally 
 
 			try {
 				if (ois != null)
@@ -118,10 +116,8 @@ public class Serial {
 		
 
 		finally {
-			// On ferme nos flux de données dans un bloc finally pour s'assurer
-			// que ces instructions seront exécutées dans tous les cas même si
-			// une exception est levée !
-
+			// On ferme nos flux de données dans un bloc finally 
+			
 			try {
 				if (ois != null)
 					ois.close();
