@@ -15,10 +15,11 @@ public class Main {
 		System.out.println("1- Jeu Recherche");
 		System.out.println("2- Jeu Mastermind");
 		System.out.println("--------------------------------");
+		System.out.println();
 		
 		
 		
-		Jeu recherche= new Recherche(Mode.Challenger);
+		Jeu recherche= new Recherche(Mode.Defenseur);
 		
 		while(recherche.statut!=6) {
 		

@@ -9,15 +9,15 @@ import Joueur.Joueur;
 public abstract class Jeu {
 	String nomJeu;
 	JeuConfig p;
-	int essai;
-	Combinaison target;
-	Combinaison target2;
-	Combinaison reponse;
-	Combinaison reponse2;
-	Joueur attaquant;
-	Joueur attaquant2;
-	Joueur defenseur;
-	Joueur defenseur2;
+	public int essai;
+	public Combinaison target;
+	public Combinaison target2;
+	public Combinaison reponse;
+	public Combinaison reponse2;
+	public Joueur attaquant;
+	public Joueur attaquant2;
+	public Joueur defenseur;
+	public Joueur defenseur2;
 	
 	
 	public int statut;
@@ -47,18 +47,18 @@ public abstract class Jeu {
 			
 			switch (this.statut) {
 			case 0:
-				System.out.println("La partie commence!");
+				//System.out.println("La partie commence!");
 				this.target.ReSet(this.defenseur);
-				System.out.println(target);
+				//System.out.println(target);
 				this.statut = 1;
 				break;
 				
 
 			case 1:
-				System.out.println("Premier tour");
-				System.out.println("la cible est : " + this.target);
+				//System.out.println("Premier tour");
+				//System.out.println("la cible est : " + this.target);
 				this.reponse.ReSet(attaquant);
-				System.out.println("réponse : " + this.reponse);
+				//System.out.println("réponse : " + this.reponse);
 				System.out.println("vérification : ");
 				this.Verification(this.target, this.reponse, this.attaquant);
 
@@ -72,7 +72,7 @@ public abstract class Jeu {
 					
 				
 			case 2:
-				System.out.println("La partie continue");
+				//System.out.println("La partie continue");
 				
 				this.reponse.ReSet(this.attaquant, this.resultat);
 				System.out.println("réponse : " + this.reponse);
@@ -91,22 +91,22 @@ public abstract class Jeu {
 					
 				
 			case 3:
-				System.out.println("Fin du tour");
+				//System.out.println("Fin du tour");
 				this.essai--;
-				System.out.println("nombre d'essai restants :" + this.essai);
+				//System.out.println("nombre d'essai restants :" + this.essai);
 				if(this.essai == 0) this.statut = 4;
 				else
 				 this.statut=2;
 				break;
 				
 			case 4:
-				System.out.println("La partie est perdue...");
+				//System.out.println("La partie est perdue...");
 				this.statut=6;
 				
 				break;
 				
 			case 5:
-				System.out.println("La partie est gagnée!");
+				//System.out.println("La partie est gagnée!");
 				this.statut=6;
 				
 				break;

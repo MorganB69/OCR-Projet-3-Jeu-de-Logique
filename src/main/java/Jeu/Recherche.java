@@ -64,6 +64,7 @@ public class Recherche extends Jeu {
 				}
 			}
 		}
+		System.out.println();
 
 	}
 
