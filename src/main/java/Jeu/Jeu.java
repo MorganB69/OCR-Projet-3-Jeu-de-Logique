@@ -117,20 +117,20 @@ public abstract class Jeu {
 			else {
 				switch (this.statut) {
 				case 0:
-					System.out.println(attaquant2.getNom());
-					System.out.println("La partie commence!");
+					//System.out.println(attaquant2.getNom());
+					//System.out.println("La partie commence!");
 					this.target.ReSet(this.defenseur);
-					System.out.println("La cible 1 est : " + target);
+					//System.out.println("La cible 1 est : " + target);
 
 
 					this.target2.ReSet(this.defenseur2);
-					System.out.println("La cible 2 est : "+ target2);
+					//System.out.println("La cible 2 est : "+ target2);
 					this.statut = 1;
 					break;
 					
 
 				case 1:
-					System.out.println("Premier tour");
+				//	System.out.println("Premier tour");
 					this.reponse.ReSet(attaquant);
 					System.out.println("réponse1 : " + this.reponse);
 					System.out.println("vérification : ");
@@ -139,7 +139,7 @@ public abstract class Jeu {
 					
 					
 					
-					for(int i=0;i<p.nbCase;i++) System.out.println(this.resultat.get(i));
+					
 					
 					System.out.println();
 
@@ -154,7 +154,7 @@ public abstract class Jeu {
 						System.out.println("vérification : ");
 						this.Verification(this.target2, this.reponse2, this.attaquant2);
 						
-						for(int i=0;i<p.nbCase;i++) System.out.println(this.resultat.get(i));
+						
 						
 						System.out.println();
 
@@ -170,13 +170,13 @@ public abstract class Jeu {
 						
 					
 				case 2:
-					System.out.println("La partie continue");
+					//System.out.println("La partie continue");
 					this.reponse.ReSet(this.attaquant);
 					System.out.println("réponse1 : " + this.reponse);
 					System.out.println("vérification : ");
 					this.Verification(this.target, this.reponse, this.attaquant);
 					
-					for(int i=0;i<p.nbCase;i++) System.out.println(this.resultat.get(i));
+					
 
 					if (this.reponse.getComb().equals(this.target.getComb())) {
 						this.statut = 5;
@@ -192,7 +192,7 @@ public abstract class Jeu {
 								this.Verification(this.target2, this.reponse2, this.attaquant2);
 								
 
-								for(int i=0;i<p.nbCase;i++) System.out.println(this.resultat.get(i));
+								
 								
 								
 								if (this.reponse2.getComb().equals(this.target2.getComb())) {
@@ -207,23 +207,23 @@ public abstract class Jeu {
 						
 					
 				case 3:
-					System.out.println("Fin du tour");
+				//	System.out.println("Fin du tour");
 					this.essai--;
 					if(this.essai == 0)
 						this.statut = 4;
 					else {
-					System.out.println("nombre d'essai restants :" + this.essai);
+				//	System.out.println("nombre d'essai restants :" + this.essai);
 					this.statut=2;}
 					break;
 					
 				case 4:
-					System.out.println("La partie est perdue...");
+				//	System.out.println("La partie est perdue...");
 					this.statut=6;
 					
 					break;
 					
 				case 5:
-					System.out.println("La partie est gagnée!");
+				//	System.out.println("La partie est gagnée!");
 					this.statut=6;
 					
 					break;
