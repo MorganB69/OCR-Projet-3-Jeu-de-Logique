@@ -53,19 +53,20 @@ public class Recherche extends Jeu {
 	public void Verification(Combinaison target, Combinaison reponse, Joueur j) {
 		
 		//Comparaison des deux combinaisons. Si le joueur est l'ordinateur on enregistre le résultat
+		this.verif="";
 		for (int i = 0; i < target.getNbCase(); i++) {
-
+			
 			if (target.getComb().get(i) == reponse.getComb().get(i)) {
-				System.out.print("=");
+				this.verif= this.verif +"=";
 				if(j.getNom()=="Ordinateur")
 				this.resultat.set(i,"=");
 			} else {
 				if (target.getComb().get(i) < reponse.getComb().get(i)) {
-					System.out.print("-");
+					this.verif= this.verif +"-";
 					if(j.getNom()=="Ordinateur")
 					this.resultat.set(i, "-");
 				} else {
-					System.out.print("+");
+					this.verif= this.verif +"+";
 					if(j.getNom()=="Ordinateur")
 					this.resultat.set(i, "+");
 				}
