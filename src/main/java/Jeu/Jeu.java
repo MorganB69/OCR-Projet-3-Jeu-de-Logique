@@ -44,26 +44,28 @@ public abstract class Jeu {
 		//while(this.statut!=6) {
 			if (this.mode==Mode.Challenger||this.mode==Mode.Defenseur) {
 				
-			
+			//MODE CHALLENGER OU DEFENSEUR
 			switch (this.statut) {
 			case 0:
-				//System.out.println("La partie commence!");
+				//Lancement de la partie
+				//Le défenseur choisit la combinaison secrète
 				this.target.ReSet(this.defenseur);
-				//System.out.println(target);
+
 				this.statut = 1;
 				break;
 				
 
 			case 1:
-				//System.out.println("Premier tour");
-				//System.out.println("la cible est : " + this.target);
+				
+				//Premier tour, l'attaquant donne une combinaison
 				this.reponse.ReSet(attaquant);
-				//System.out.println("réponse : " + this.reponse);
+				//Cette combinaison est vérifiée
+				System.out.println("réponse : " + this.reponse);
 				System.out.println("vérification : ");
 				this.Verification(this.target, this.reponse, this.attaquant);
 
 				if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
-				
+				//Si la combinaison est bonne, la partie est gagnée sinon fin du tour
 				
 						
 				else this.statut = 3;
@@ -72,7 +74,9 @@ public abstract class Jeu {
 					
 				
 			case 2:
-				//System.out.println("La partie continue");
+				//Autres tours
+				//L'attaquant change sa combinaison, en prenant en paramètre le résultat précédent
+				//pour adapter sa future combinaison (Utile pour l'ordinateur)
 				
 				this.reponse.ReSet(this.attaquant, this.resultat);
 				System.out.println("réponse : " + this.reponse);
@@ -91,22 +95,21 @@ public abstract class Jeu {
 					
 				
 			case 3:
-				//System.out.println("Fin du tour");
+				//Fin du tour, on décrémente essai. Si on arrive à 0, la partie est perdue sinon autre tour
 				this.essai--;
-				//System.out.println("nombre d'essai restants :" + this.essai);
 				if(this.essai == 0) this.statut = 4;
 				else
 				 this.statut=2;
 				break;
 				
 			case 4:
-				//System.out.println("La partie est perdue...");
+				//La partie est perdue. Fin de la partie.
 				this.statut=6;
 				
 				break;
 				
 			case 5:
-				//System.out.println("La partie est gagnée!");
+				//La partie est gagnée. Fin de la partie.
 				this.statut=6;
 				
 				break;
@@ -115,53 +118,45 @@ public abstract class Jeu {
 			}
 			
 			else {
+				//MODE DUEL
 				switch (this.statut) {
+				
 				case 0:
-					//System.out.println(attaquant2.getNom());
-					//System.out.println("La partie commence!");
+					//Lancement de la partie, les deux joueurs donnent une combinaison secrète
 					this.target.ReSet(this.defenseur);
-					//System.out.println("La cible 1 est : " + target);
-
-
 					this.target2.ReSet(this.defenseur2);
-					//System.out.println("La cible 2 est : "+ target2);
+					
 					this.statut = 1;
 					break;
 					
 
 				case 1:
-				//	System.out.println("Premier tour");
+					//Premier tour
+					//Au premier joueur de jouer.
 					this.reponse.ReSet(attaquant);
 					System.out.println("réponse1 : " + this.reponse);
 					System.out.println("vérification : ");
 					
 					this.Verification(this.target, this.reponse,this.attaquant);
 					
-					
-					
-					
-					
 					System.out.println();
-
 
 					if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
 					
 					
 							
 					else {
+						//Au deuxième joueur de jouer
 						this.reponse2.ReSet(attaquant2);
 						System.out.println("réponse2 : " + this.reponse2);
 						System.out.println("vérification : ");
 						this.Verification(this.target2, this.reponse2, this.attaquant2);
-						
-						
 						
 						System.out.println();
 
 						if (this.reponse2.getComb().equals(this.target2.getComb())) this.statut = 5;
 						
 						else
-						
 						
 						this.statut = 3;
 					}
@@ -170,21 +165,21 @@ public abstract class Jeu {
 						
 					
 				case 2:
-					//System.out.println("La partie continue");
+					//Autres tours
+					
+					//Premier joueur de jouer
 					this.reponse.ReSet(this.attaquant);
 					System.out.println("réponse1 : " + this.reponse);
 					System.out.println("vérification : ");
 					this.Verification(this.target, this.reponse, this.attaquant);
-					
-					
 
 					if (this.reponse.getComb().equals(this.target.getComb())) {
 						this.statut = 5;
 						
 					}
 					
-
 							else {
+								//Deuxième joueur de jouer.
 								this.reponse2.ReSet(this.attaquant2, this.resultat);
 								System.out.println("réponse2 : " + this.reponse2);
 								System.out.println("vérification : ");
@@ -192,9 +187,6 @@ public abstract class Jeu {
 								this.Verification(this.target2, this.reponse2, this.attaquant2);
 								
 
-								
-								
-								
 								if (this.reponse2.getComb().equals(this.target2.getComb())) {
 									this.statut = 5;	
 								}
@@ -203,27 +195,25 @@ public abstract class Jeu {
 							}
 								
 					break;
-							
-						
-					
+										
 				case 3:
-				//	System.out.println("Fin du tour");
+				//	Fin du tour, on décrémente essai
 					this.essai--;
 					if(this.essai == 0)
 						this.statut = 4;
 					else {
-				//	System.out.println("nombre d'essai restants :" + this.essai);
+				
 					this.statut=2;}
 					break;
 					
 				case 4:
-				//	System.out.println("La partie est perdue...");
+				//	La partie est perdue
 					this.statut=6;
 					
 					break;
 					
 				case 5:
-				//	System.out.println("La partie est gagnée!");
+				//	La partie est gagnée.
 					this.statut=6;
 					
 					break;

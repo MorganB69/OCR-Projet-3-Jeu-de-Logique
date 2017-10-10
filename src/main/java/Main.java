@@ -19,7 +19,7 @@ public class Main {
 		
 		
 		
-		Jeu recherche= new Recherche(Mode.Defenseur);
+		Jeu recherche= new Recherche(Mode.Duel);
 		
 		while(recherche.statut!=6) {
 		

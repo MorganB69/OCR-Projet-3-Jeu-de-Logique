@@ -1,6 +1,6 @@
 package Jeu;
 
-import java.util.ArrayList;
+
 
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonR;
@@ -13,8 +13,13 @@ public class Recherche extends Jeu {
 
 	public Recherche(Mode mode) {
 		super(mode);
+		this.nomJeu="Recherche";
 		for(int i=0;i<p.nbCase;i++) this.resultat.add(i,"");
+		
+		
 		switch (mode) {
+		//Instanciation des joueurs et des combinaisons en fonction du mode choisi
+		
 		case Challenger:
 			this.attaquant = new User();
 			this.defenseur = new Ordinateur();
@@ -46,6 +51,8 @@ public class Recherche extends Jeu {
 	}
 
 	public void Verification(Combinaison target, Combinaison reponse, Joueur j) {
+		
+		//Comparaison des deux combinaisons. Si le joueur est l'ordinateur on enregistre le résultat
 		for (int i = 0; i < target.getNbCase(); i++) {
 
 			if (target.getComb().get(i) == reponse.getComb().get(i)) {
