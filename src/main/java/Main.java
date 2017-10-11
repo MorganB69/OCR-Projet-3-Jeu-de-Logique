@@ -17,11 +17,15 @@ public class Main {
 		
 		Jeu recherche= new Recherche(Mode.Challenger);
 		
+		IHM i=new IHM();
+		i.AfficherAccueil();
+		recherche.addObserver(i);	
+		
 		
 
 		
 		while(recherche.statut!=6) {
-		
+
 
 		recherche.DemarrerJeu();
 		}

@@ -1,10 +1,13 @@
 package IHM;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 import Combinaison.Combinaison;
 import Jeu.Jeu;
+import Jeu.Recherche;
 
-public class IHM {
+public class IHM implements Observer {
 	
 	
 	
@@ -23,9 +26,24 @@ public class IHM {
 	}
 	
 	public void cls(){
-		  for(int i=0; i<50; i++)
+		  for(int i=0; i<650; i++)
 		    System.out.println();
 		}
+	
+	public final static void clearConsole()
+	{
+	    try
+	    {
+	        if (System.getProperty("os.name").contains("Windows"))
+	            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	        else
+	            Runtime.getRuntime().exec("clear");
+	    }
+	    catch (final Exception e)
+	    {
+	        System.out.println("Erreur");
+	    }
+	}
 	
 	public void AfficherComb(Combinaison c) {
 		System.out.println("La combinaison est :" + c);
@@ -56,6 +74,57 @@ public class IHM {
 		
 	public void AfficherFinPartie(String s) {
 		System.out.println("La partie est : " + s);
+	}
+
+
+	@Override
+	public void update(Observable o, Object obj) {
+		if(o instanceof Recherche)
+			
+			
+        {       
+			
+		
+			
+                Recherche r = (Recherche) o;
+                System.out.println();
+                
+                switch (r.statut) {
+                case 0:
+                	System.out.println("Bonjour, la partie commence");
+                	System.out.println("Vous avez " + r.essai + " essais");
+                	System.out.println("La combinaison est composée de " + r.target.getNbCase() + " chiffres.");
+                	System.out.println("La cible est : " + r.target);
+                	System.out.println();
+                	break;
+                	
+                case 3:
+                	System.out.println("Fin du tour");
+                	System.out.println("Il vous reste "+r.essai+ " essais.");
+                	System.out.println();
+                	break;
+                	
+				case 4:
+					System.out.println("La partie est perdue...");
+					break;
+					
+				case 5:
+					System.out.println("La partie est gagnée!");
+					break;
+
+				default:
+					
+	                
+	                System.out.println("Votre réponse est : " + r.reponse);
+	                System.out.println("Vérification : " +r.verif);
+					
+					break;
+				}
+                
+                
+                
+
+        }     
 	}
 	
 	

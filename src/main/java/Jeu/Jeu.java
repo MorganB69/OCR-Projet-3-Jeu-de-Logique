@@ -1,13 +1,14 @@
 package Jeu;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import Combinaison.Combinaison;
 import Config.JeuConfig;
 import IHM.IHM;
 import Joueur.Joueur;
 
-public abstract class Jeu {
+public abstract class Jeu extends Observable {
 	String nomJeu;
 	JeuConfig p;
 	public int essai;
@@ -19,13 +20,13 @@ public abstract class Jeu {
 	public Joueur attaquant2;
 	public Joueur defenseur;
 	public Joueur defenseur2;
-	public IHM i;
+	//public IHM i;
 	
 	
 	public int statut;
 	Mode mode;
-	ArrayList<String> resultat;
-	String verif;
+	public ArrayList<String> resultat;
+	public String verif;
 	//ArrayList<String> resultat2 = new ArrayList<String>();
 
 	public Jeu(Mode mode) {
@@ -36,13 +37,18 @@ public abstract class Jeu {
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
 		this.resultat = new ArrayList<String>();
-		this.i= new IHM();
-		i.AfficherAccueil();
+		//this.i= new IHM();
+		//i.AfficherAccueil();
 		
 	}
 
 	public void Verification(Combinaison target, Combinaison reponse, Joueur attaquant) {
 
+	}
+	
+	public void notifierObservateur() {
+		setChanged();
+		notifyObservers();
 	}
 
 	public void DemarrerJeu() {
@@ -58,7 +64,8 @@ public abstract class Jeu {
 				//Lancement de la partie
 				//Le défenseur choisit la combinaison secrète
 				this.target.ReSet(this.defenseur);
-				i.AfficherComb(this.target);
+				//i.AfficherComb(this.target);
+				notifierObservateur();
 				this.statut = 1;
 				break;
 				
@@ -67,13 +74,13 @@ public abstract class Jeu {
 				
 				//Premier tour, l'attaquant donne une combinaison
 				this.reponse.ReSet(attaquant);
-				i.AfficherComb(this.reponse);
+				//i.AfficherComb(this.reponse);
 				//Cette combinaison est vérifiée
 				//System.out.println("réponse : " + this.reponse);
 				//System.out.println("vérification : ");
 				this.Verification(this.target, this.reponse, this.attaquant);
-				i.AfficherVerif(this.verif);
-				
+				//i.AfficherVerif(this.verif);
+				notifierObservateur();
 
 				if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
 				//Si la combinaison est bonne, la partie est gagnée sinon fin du tour
@@ -90,11 +97,13 @@ public abstract class Jeu {
 				//pour adapter sa future combinaison (Utile pour l'ordinateur)
 				
 				this.reponse.ReSet(this.attaquant, this.resultat);
-				i.AfficherComb(this.reponse);
+				//i.AfficherComb(this.reponse);
 				//System.out.println("réponse : " + this.reponse);
 				//System.out.println("vérification : ");
 				this.Verification(this.target, this.reponse, this.attaquant);
-				i.AfficherVerif(this.verif);
+				//i.AfficherVerif(this.verif);
+				
+				notifierObservateur();
 
 				if (this.reponse.getComb().equals(this.target.getComb())) {
 					this.statut = 5;
@@ -109,7 +118,8 @@ public abstract class Jeu {
 			case 3:
 				//Fin du tour, on décrémente essai. Si on arrive à 0, la partie est perdue sinon autre tour
 				this.essai--;
-				i.AfficherNbEssai(this.essai);
+				notifierObservateur();
+			//	i.AfficherNbEssai(this.essai);
 				if(this.essai == 0) this.statut = 4;
 				else
 				 this.statut=2;
@@ -117,14 +127,16 @@ public abstract class Jeu {
 				
 			case 4:
 				//La partie est perdue. Fin de la partie.
-				i.AfficherFinPartie("Perdue");
+			//	i.AfficherFinPartie("Perdue");
+				notifierObservateur();
 				this.statut=6;
 				
 				break;
 				
 			case 5:
 				//La partie est gagnée. Fin de la partie.
-				i.AfficherFinPartie("Gagnée");
+			//	i.AfficherFinPartie("Gagnée");
+				notifierObservateur();
 				this.statut=6;
 				
 				break;
@@ -149,12 +161,12 @@ public abstract class Jeu {
 					//Premier tour
 					//Au premier joueur de jouer.
 					this.reponse.ReSet(attaquant);
-					i.AfficherComb(this.reponse);
+				//	i.AfficherComb(this.reponse);
 					//System.out.println("réponse1 : " + this.reponse);
 					//System.out.println("vérification : ");
 					
 					this.Verification(this.target, this.reponse,this.attaquant);
-					i.AfficherVerif(this.verif);
+				//	i.AfficherVerif(this.verif);
 					
 					//System.out.println();
 
@@ -165,11 +177,11 @@ public abstract class Jeu {
 					else {
 						//Au deuxième joueur de jouer
 						this.reponse2.ReSet(attaquant2);
-						i.AfficherComb(this.reponse2);
+				//		i.AfficherComb(this.reponse2);
 						//System.out.println("réponse2 : " + this.reponse2);
 						//System.out.println("vérification : ");
 						this.Verification(this.target2, this.reponse2, this.attaquant2);
-						i.AfficherVerif(this.verif);
+				//		i.AfficherVerif(this.verif);
 						
 						//System.out.println();
 
@@ -188,11 +200,11 @@ public abstract class Jeu {
 					
 					//Premier joueur de jouer
 					this.reponse.ReSet(this.attaquant);
-					i.AfficherComb(this.reponse);
+				//	i.AfficherComb(this.reponse);
 					//System.out.println("réponse1 : " + this.reponse);
 					//System.out.println("vérification : ");
 					this.Verification(this.target, this.reponse, this.attaquant);
-					i.AfficherVerif(this.verif);
+				//	i.AfficherVerif(this.verif);
 
 					if (this.reponse.getComb().equals(this.target.getComb())) {
 						this.statut = 5;
@@ -202,12 +214,12 @@ public abstract class Jeu {
 							else {
 								//Deuxième joueur de jouer.
 								this.reponse2.ReSet(this.attaquant2, this.resultat);
-								i.AfficherComb(this.reponse2);
+						//		i.AfficherComb(this.reponse2);
 								//System.out.println("réponse2 : " + this.reponse2);
 								//System.out.println("vérification : ");
 								;
 								this.Verification(this.target2, this.reponse2, this.attaquant2);
-								i.AfficherVerif(this.verif);
+						//		i.AfficherVerif(this.verif);
 
 								if (this.reponse2.getComb().equals(this.target2.getComb())) {
 									this.statut = 5;	
@@ -221,7 +233,7 @@ public abstract class Jeu {
 				case 3:
 				//	Fin du tour, on décrémente essai
 					this.essai--;
-					i.AfficherNbEssai(this.essai);
+			//		i.AfficherNbEssai(this.essai);
 					if(this.essai == 0)
 						this.statut = 4;
 					else {
@@ -231,14 +243,14 @@ public abstract class Jeu {
 					
 				case 4:
 				//	La partie est perdue
-					i.AfficherFinPartie("perdue");
+			//		i.AfficherFinPartie("perdue");
 					this.statut=6;
 					
 					break;
 					
 				case 5:
 				//	La partie est gagnée.
-					i.AfficherFinPartie("perdue");
+			//		i.AfficherFinPartie("perdue");
 					this.statut=6;
 					
 					break;
