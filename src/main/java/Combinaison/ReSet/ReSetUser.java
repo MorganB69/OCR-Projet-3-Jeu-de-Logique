@@ -10,7 +10,10 @@ public class ReSetUser implements ReSet {
 	
 
 	public void SetComb(Combinaison c) {
-		IHM i=new IHM();
+
+		}
+	
+	public void SetComb(Combinaison c, IHM i) {
 		i.SaisirComb(c);
 		
 		

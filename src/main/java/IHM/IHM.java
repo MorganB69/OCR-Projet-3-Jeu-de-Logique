@@ -45,16 +45,11 @@ public class IHM implements Observer {
 	    }
 	}
 	
-	public void AfficherComb(Combinaison c) {
-		System.out.println("La combinaison est :" + c);
-	}
-	
-	public void AfficherVerif(String s) {
-		System.out.println("Vérification de la combinaison : " + s);
-	}
+
 	
 	public void SaisirComb(Combinaison c) {
-		System.out.println("Veuillez saisir une combinaison");
+
+		System.out.println("Joueur, veuillez saisir une combinaison");
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
@@ -67,17 +62,10 @@ public class IHM implements Observer {
 	}
 	}
 		
-	public void AfficherNbEssai(int e) {
-		System.out.println("Nombre d'essai restants : "+ e);
-	}
-
-		
-	public void AfficherFinPartie(String s) {
-		System.out.println("La partie est : " + s);
-	}
 
 
-	@Override
+
+	
 	public void update(Observable o, Object obj) {
 		if(o instanceof Recherche)
 			
@@ -92,11 +80,25 @@ public class IHM implements Observer {
                 switch (r.statut) {
                 case 0:
                 	System.out.println("Bonjour, la partie commence");
+                	System.out.println("Le mode est : " + r.mode.name());
                 	System.out.println("Vous avez " + r.essai + " essais");
                 	System.out.println("La combinaison est composée de " + r.target.getNbCase() + " chiffres.");
                 	System.out.println("La cible est : " + r.target);
+                	if (r.target2 != null) System.out.println("La deuxième cible est " + r.target2);
                 	System.out.println();
                 	break;
+                	
+                case 1:
+                	
+                	System.out.println("Votre réponse est : " + r.reponse);
+ 	                System.out.println("Vérification : " +r.verif);
+ 	                break;
+ 	                
+                case 2:
+                	
+                	System.out.println("Votre réponse est : " + r.reponse);
+ 	                System.out.println("Vérification : " +r.verif);
+ 	                break;
                 	
                 case 3:
                 	System.out.println("Fin du tour");
@@ -114,8 +116,8 @@ public class IHM implements Observer {
 
 				default:
 					
-	                
-	                System.out.println("Votre réponse est : " + r.reponse);
+					System.out.println(r.attaquant2.getNom() + " à vous de jouer");
+	                System.out.println("Votre réponse est : " + r.reponse2);
 	                System.out.println("Vérification : " +r.verif);
 					
 					break;

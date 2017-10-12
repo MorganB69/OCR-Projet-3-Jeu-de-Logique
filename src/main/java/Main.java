@@ -15,11 +15,9 @@ public class Main {
 		
 		
 		
-		Jeu recherche= new Recherche(Mode.Challenger);
+		Jeu recherche= new Recherche(Mode.Duel);
 		
-		IHM i=new IHM();
-		i.AfficherAccueil();
-		recherche.addObserver(i);	
+	
 		
 		
 
