@@ -25,13 +25,14 @@ public class Serial {
 		this.d = d;
 	}
 
-	public void Ecriture(ArrayList<Integer> l) {
+	public void Ecriture(ArrayList<Parametres> p) {
 		try {
 			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.d,this.p))));
 
-			for (int i=0;i<l.size();i++) {
-			oos.writeInt(l.get(i));
-			}
+			
+			oos.writeObject(p);
+			
+			
 
 			oos.close();
 
@@ -49,19 +50,21 @@ public class Serial {
 
 	}
 
-	public void Lecture() {
-		ArrayList<Object> list = new ArrayList<Object>();
+
+
+	public ArrayList<Parametres> Lecture() {
+		ArrayList<Parametres> list = new ArrayList<Parametres>();
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
 
-			ois.readInt();
+			list = (ArrayList<Parametres>) ois.readObject();
 
 
 		}
 
-		//catch (ClassNotFoundException e) {
-		//	e.printStackTrace();
-		//}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -83,11 +86,12 @@ public class Serial {
 			}
 
 		}
-		
+		return list;
 	}
 
 	public ArrayList<Integer> Recuperation() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
+		
 		try {
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
 			
@@ -133,5 +137,51 @@ public class Serial {
 	
 		
 	}
+	public Boolean RecuperationB() {
+		Boolean b=false;
+		try {
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
+			
+			while(ois.available()>0) {
+			b=(ois.readBoolean());
+			}
+			
+			
+
+
+		}
+
+		//catch (ClassNotFoundException e) {
+			//e.printStackTrace();
+		//}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+
+		finally {
+			// On ferme nos flux de données dans un bloc finally 
+			
+			try {
+				if (ois != null)
+					ois.close();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+
+		}
+		return b;
+		
 	
+		
+	}	
 }

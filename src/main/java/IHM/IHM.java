@@ -83,8 +83,12 @@ public class IHM implements Observer {
                 	System.out.println("Le mode est : " + r.mode.name());
                 	System.out.println("Vous avez " + r.essai + " essais");
                 	System.out.println("La combinaison est composée de " + r.target.getNbCase() + " chiffres.");
-                	System.out.println("La cible est : " + r.target);
-                	if (r.target2 != null) System.out.println("La deuxième cible est " + r.target2);
+                	if (r.dev==true) {
+                		System.out.println("La cible est : " + r.target);
+                	
+                		if (r.target2 != null) System.out.println("La deuxième cible est " + r.target2);
+                	}
+                	else System.out.print("");
                 	System.out.println();
                 	break;
                 	

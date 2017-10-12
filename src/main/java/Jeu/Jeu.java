@@ -12,6 +12,7 @@ public abstract class Jeu extends Observable {
 	String nomJeu;
 	JeuConfig p;
 	public int essai;
+	public Boolean dev;
 	public Combinaison target;
 	public Combinaison target2;
 	public Combinaison reponse;
@@ -35,6 +36,7 @@ public abstract class Jeu extends Observable {
 		this.p= new JeuConfig();
 		this.mode = mode;
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
+		this.dev=p.dev;
 		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
 		this.resultat = new ArrayList<String>();
 		this.i= new IHM();

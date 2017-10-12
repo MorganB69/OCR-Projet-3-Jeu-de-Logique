@@ -6,29 +6,26 @@ public class JeuConfig {
 	public int essai;
 	public int nbCase;
 	public int chiffre;
+	public  Boolean dev;
 	
 		public JeuConfig(){
-	
+		
 		
 		Serial s = new Serial("resources","config.properties");
-		ArrayList<Integer> list= new ArrayList<Integer>();
-		
-		//ArrayList<Integer> listserial= new ArrayList<Integer>();
-		//int essai=5;
-		//int nbCase=3;
-		//int chiffre=4;
-		//listserial.add(0,essai);
-		//listserial.add(1,nbCase);
-		//listserial.add(2,chiffre);
-		
-		//s.Ecriture(listserial);
 		
 		
-		list=s.Recuperation();
-		this.essai=list.get(0);
-		this.nbCase=list.get(1);
-		this.chiffre=list.get(2);
+		//ArrayList<Parametres> list= new ArrayList<Parametres>();
+		//list.add(new Parametres(5,3,4,false));
+		//s.Ecriture(list);
+
 		
+		
+		ArrayList<Parametres> listrecup = new ArrayList<Parametres>();
+		listrecup=s.Lecture();
+		this.essai=listrecup.get(0).essai;
+		this.nbCase=listrecup.get(0).nbCase;
+		this.chiffre=listrecup.get(0).chiffre;
+		this.dev=listrecup.get(0).dev;
 		}
 		
 

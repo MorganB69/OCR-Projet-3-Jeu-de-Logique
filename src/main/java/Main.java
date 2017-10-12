@@ -1,9 +1,9 @@
-import java.util.ArrayList;
 
-import IHM.IHM;
+
+
 import Jeu.Jeu;
 import Jeu.Mode;
-import Jeu.Partie;
+
 import Jeu.Recherche;
 
 public class Main {
@@ -12,15 +12,19 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
+		Jeu recherche= new Recherche(Mode.Challenger);
 		
-		
-		
-		Jeu recherche= new Recherche(Mode.Duel);
-		
-	
-		
-		
+		try {
+			if (args[0].equals("d")) {
+				recherche.dev=true;
+				System.out.println("mode dév activé");
+			}
+			else System.out.println(args[0]);
+		} catch (Exception e) {
+			System.out.println("mode normal");
+		}
 
+		
 		
 		while(recherche.statut!=6) {
 
