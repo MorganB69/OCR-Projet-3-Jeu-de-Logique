@@ -6,7 +6,7 @@ public class JeuConfig {
 	public int essai;
 	public int nbCase;
 	public int chiffre;
-	public  Boolean dev;
+	public Boolean dev;
 	
 		public JeuConfig(){
 		

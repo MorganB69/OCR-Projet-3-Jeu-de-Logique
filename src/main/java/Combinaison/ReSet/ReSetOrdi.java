@@ -38,6 +38,17 @@ public class ReSetOrdi implements ReSet {
 			
 		}
 	}
+	
+	public void SetCombM(Combinaison c, IHM k) {
+		//Par défaut, donne une combinaison aléatoire
+				for (int i = 0; i < c.getNbCase(); i++) {
+					c.getComb().set(i, (int) (Math.random() * (c.chiffre - 0 + 1) + 0));
+				}
+	}
+	
+	public void SetCombM(Combinaison c,ArrayList<Integer> j, IHM k) {
+		
+	}
 
 }
 

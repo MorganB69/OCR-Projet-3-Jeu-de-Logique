@@ -13,12 +13,14 @@ public abstract class Combinaison {
 	int nbCase;
 	public int[]max;
 	public int[]min;
+	public int chiffre;
 	
 
 	public Combinaison() {
 		// TODO Auto-generated constructor stub
 		this.p= new JeuConfig();
 		this.comb = new ArrayList<Integer>();
+		this.chiffre=p.chiffre;
 		
 		this.nbCase = p.nbCase;// A MODIFIER APRES INTEGRATION DU FICHIER CONFIG
 

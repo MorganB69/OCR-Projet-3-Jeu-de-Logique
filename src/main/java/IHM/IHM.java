@@ -4,6 +4,8 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import Combinaison.Combinaison;
+import Combinaison.CombinaisonM;
+import Config.JeuConfig;
 import Jeu.Jeu;
 import Jeu.Recherche;
 
@@ -61,20 +63,36 @@ public class IHM implements Observer {
 				c.getComb().set(i, a);
 	}
 	}
+	
+	public void SaisirCombM(Combinaison c) {
+
+		System.out.println("Joueur, veuillez saisir une combinaison");
+		Scanner sc = new Scanner(System.in);
+		String essai = new String();
+		essai = sc.nextLine();
+		for (int i = 0; i < c.getNbCase(); i++) {
+			int a = Character.getNumericValue(essai.charAt(i));
+			if (a < 0 || a > c.chiffre)
+				System.out.println("Erreur dans la combinaison");
+				
+			else
+				c.getComb().set(i, a);
+	}
+	}
 		
 
 
 
 	
 	public void update(Observable o, Object obj) {
-		if(o instanceof Recherche)
+		if(o instanceof Jeu)
 			
 			
         {       
 			
 		
 			
-                Recherche r = (Recherche) o;
+                Jeu r = (Jeu) o;
                 System.out.println();
                 
                 switch (r.statut) {

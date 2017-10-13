@@ -26,7 +26,8 @@ public abstract class Jeu extends Observable {
 	
 	public int statut;
 	public Mode mode;
-	public ArrayList<String> resultat;
+	public ArrayList resultat;
+	
 	public String verif;
 	//ArrayList<String> resultat2 = new ArrayList<String>();
 
@@ -38,7 +39,7 @@ public abstract class Jeu extends Observable {
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.dev=p.dev;
 		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
-		this.resultat = new ArrayList<String>();
+		this.resultat = new ArrayList<>();
 		this.i= new IHM();
 		i.AfficherAccueil();
 		this.addObserver(i);

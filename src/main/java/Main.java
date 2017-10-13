@@ -2,6 +2,7 @@
 
 
 import Jeu.Jeu;
+import Jeu.Mastermind;
 import Jeu.Mode;
 
 import Jeu.Recherche;
@@ -12,7 +13,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
-		Jeu recherche= new Recherche(Mode.Duel);
+		Jeu recherche= new Mastermind(Mode.Challenger);
 		
 		try {
 			if (args[0].equals("d")) {
