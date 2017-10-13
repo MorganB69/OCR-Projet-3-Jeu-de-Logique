@@ -12,7 +12,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		
-		Jeu recherche= new Recherche(Mode.Challenger);
+		Jeu recherche= new Recherche(Mode.Duel);
 		
 		try {
 			if (args[0].equals("d")) {
