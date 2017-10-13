@@ -1,8 +1,9 @@
-import java.util.ArrayList;
+
+
 
 import Jeu.Jeu;
 import Jeu.Mode;
-import Jeu.Partie;
+
 import Jeu.Recherche;
 
 public class Main {
@@ -10,19 +11,24 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Bonjour, veuillez choisir un jeu");
-		System.out.println("--------------------------------");
-		System.out.println("1- Jeu Recherche");
-		System.out.println("2- Jeu Mastermind");
-		System.out.println("--------------------------------");
 		
+		Jeu recherche= new Recherche(Mode.Duel);
 		
+		try {
+			if (args[0].equals("d")) {
+				recherche.dev=true;
+				System.out.println("mode dév activé");
+			}
+			else System.out.println(args[0]);
+		} catch (Exception e) {
+			System.out.println("mode normal");
+		}
+
 		
-		Jeu recherche= new Recherche(Mode.Challenger);
 		
 		while(recherche.statut!=6) {
-		
-		Interface i=new Interface(recherche);
+
+
 		recherche.DemarrerJeu();
 		}
 		

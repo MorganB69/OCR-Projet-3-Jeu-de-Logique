@@ -3,6 +3,7 @@ package Combinaison;
 import java.util.ArrayList;
 
 import Config.JeuConfig;
+import IHM.IHM;
 import Joueur.Joueur;
 
 public abstract class Combinaison {
@@ -43,7 +44,11 @@ public abstract class Combinaison {
 
 	}
 	
-	public void ReSet(Joueur j,ArrayList<String> l) {
+	public void ReSet(Joueur j,IHM i) {
+
+	}
+	
+	public void ReSet(Joueur j,ArrayList<String> l, IHM i) {
 
 	}
 	
