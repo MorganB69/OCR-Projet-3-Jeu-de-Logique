@@ -66,14 +66,17 @@ public class Mastermind extends Jeu {
 				this.bienPlace++;
 			} else {
 				for (int k = 0; k < target.getNbCase(); k++) {
-					if (target.getComb().get(i) == reponse.getComb().get(k) && target.getComb().get(i) != reponse.getComb().get(i)) {
+					if (target.getComb().get(k) == reponse.getComb().get(i) && 
+						target.getComb().get(i) != reponse.getComb().get(i)&&
+						target.getComb().get(k) != reponse.getComb().get(k)){
 						this.malPlace++;
+						break;
 					}
 				}
 				
 			}
 		}
-		this.verif=this.bienPlace+ "bien placés + " +this.malPlace + " à une autre place";
+		this.verif=this.bienPlace+ " à la bonne place + " +this.malPlace + " à une autre place";
 		
 		System.out.println();
 

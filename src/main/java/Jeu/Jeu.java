@@ -24,7 +24,7 @@ public abstract class Jeu extends Observable {
 	public IHM i;
 	
 	
-	public int statut;
+	public Statut statut;
 	public Mode mode;
 	public ArrayList resultat;
 	
@@ -38,7 +38,8 @@ public abstract class Jeu extends Observable {
 		this.mode = mode;
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.dev=p.dev;
-		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
+		this.statut = Statut.Start;
+		// A CHANGER VIA UNE ENUMERATION
 		this.resultat = new ArrayList<>();
 		this.i= new IHM();
 		i.AfficherAccueil();
@@ -64,17 +65,17 @@ public abstract class Jeu extends Observable {
 				
 			//MODE CHALLENGER OU DEFENSEUR
 			switch (this.statut) {
-			case 0:
+			case Start:
 				//Lancement de la partie
 				//Le défenseur choisit la combinaison secrète
 				this.target.ReSet(this.defenseur,this.i);
 				
 				notifierObservateur();
-				this.statut = 1;
+				this.statut = Statut.Tour1;
 				break;
 				
 
-			case 1:
+			case Tour1:
 				
 				//Premier tour, l'attaquant donne une combinaison
 				this.reponse.ReSet(attaquant,this.i);
@@ -85,16 +86,16 @@ public abstract class Jeu extends Observable {
 
 				notifierObservateur();
 
-				if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
+				if (this.reponse.getComb().equals(this.target.getComb())) this.statut = Statut.Gagné;
 				//Si la combinaison est bonne, la partie est gagnée sinon fin du tour
 				
 						
-				else this.statut = 3;
+				else this.statut = Statut.FinTour;
 				break;
 						
 					
 				
-			case 2:
+			case EnCours:
 				//Autres tours
 				//L'attaquant change sa combinaison, en prenant en paramètre le résultat précédent
 				//pour adapter sa future combinaison (Utile pour l'ordinateur)
@@ -107,38 +108,38 @@ public abstract class Jeu extends Observable {
 				notifierObservateur();
 
 				if (this.reponse.getComb().equals(this.target.getComb())) {
-					this.statut = 5;
+					this.statut = Statut.Gagné;
 					
 				}
 				else 
-					this.statut = 3;
+					this.statut = Statut.FinTour;
 				break;
 						
 					
 				
-			case 3:
+			case FinTour:
 				//Fin du tour, on décrémente essai. Si on arrive à 0, la partie est perdue sinon autre tour
 				this.essai--;
 				notifierObservateur();
 
-				if(this.essai == 0) this.statut = 4;
+				if(this.essai == 0) this.statut = Statut.Perdu;
 				else
-				 this.statut=2;
+				 this.statut=Statut.EnCours;
 				break;
 				
-			case 4:
+			case Perdu:
 				//La partie est perdue. Fin de la partie.
 
 				notifierObservateur();
-				this.statut=6;
+				this.statut=Statut.Fin;
 				
 				break;
 				
-			case 5:
+			case Gagné:
 				//La partie est gagnée. Fin de la partie.
 
 				notifierObservateur();
-				this.statut=6;
+				this.statut=Statut.Fin;
 				
 				break;
 				
@@ -149,16 +150,16 @@ public abstract class Jeu extends Observable {
 				//MODE DUEL
 				switch (this.statut) {
 				
-				case 0:
+				case Start:
 					//Lancement de la partie, les deux joueurs donnent une combinaison secrète
 					this.target.ReSet(this.defenseur,this.i);
 					this.target2.ReSet(this.defenseur2,this.i);
 					notifierObservateur();
-					this.statut = 1;
+					this.statut = Statut.Tour1;
 					break;
 					
 
-				case 1:
+				case Tour1:
 					//Premier tour
 					//Au premier joueur de jouer.
 					this.reponse.ReSet(attaquant,this.i);
@@ -169,11 +170,11 @@ public abstract class Jeu extends Observable {
 					notifierObservateur();
 
 
-					if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
+					if (this.reponse.getComb().equals(this.target.getComb())) this.statut = Statut.Gagné;
 					
 					
 							
-					else this.statut = 7;
+					else this.statut = Statut.Tour1J2;
 					
 					break;
 					
@@ -181,7 +182,7 @@ public abstract class Jeu extends Observable {
 							
 						
 					
-				case 2:
+				case EnCours:
 					//Autres tours
 					
 					//Premier joueur de jouer
@@ -191,58 +192,58 @@ public abstract class Jeu extends Observable {
 
 					notifierObservateur();
 					if (this.reponse.getComb().equals(this.target.getComb())) {
-						this.statut = 5;
+						this.statut = Statut.Gagné;
 						
 					}
 					
-							else this.statut=8;
+							else this.statut=Statut.EnCoursJ2;
 								
 					break;
 										
-				case 3:
+				case FinTour:
 				//	Fin du tour, on décrémente essai
 					this.essai--;
 
 					notifierObservateur();
 					if(this.essai == 0)
-						this.statut = 4;
+						this.statut = Statut.Perdu;
 					else {
 				
-					this.statut=2;}
+					this.statut=Statut.EnCours;}
 					break;
 					
-				case 4:
+				case Perdu:
 				//	La partie est perdue
 
 					notifierObservateur();
-					this.statut=6;
+					this.statut=Statut.Fin;
 					
 					break;
 					
-				case 5:
+				case Gagné:
 				//	La partie est gagnée.
 
 					notifierObservateur();
-					this.statut=6;
+					this.statut=Statut.Fin;
 					
 					break;
 					
-				case 7:	
+				case Tour1J2:	
 					//Au deuxième joueur de jouer
 					this.reponse2.ReSet(attaquant2,this.i);
 
 					this.Verification(this.target2, this.reponse2, this.attaquant2);
 
 					notifierObservateur();
-					if (this.reponse2.getComb().equals(this.target2.getComb())) this.statut = 5;
+					if (this.reponse2.getComb().equals(this.target2.getComb())) this.statut = Statut.Gagné;
 					
 					else
 					
-					this.statut = 3;
+					this.statut = Statut.FinTour;
 				
 				break;
 				
-				case 8:
+				case EnCoursJ2:
 					//Deuxième joueur de jouer.
 					this.reponse2.ReSet(this.attaquant2, this.resultat,this.i);
 
@@ -251,9 +252,9 @@ public abstract class Jeu extends Observable {
 
 					notifierObservateur();
 					if (this.reponse2.getComb().equals(this.target2.getComb())) {
-						this.statut = 5;	
+						this.statut = Statut.Gagné;	
 					}
-					else this.statut = 3;
+					else this.statut = Statut.FinTour;
 					
 				break;	
 				}

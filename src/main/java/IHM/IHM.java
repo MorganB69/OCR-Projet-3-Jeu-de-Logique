@@ -96,7 +96,7 @@ public class IHM implements Observer {
                 System.out.println();
                 
                 switch (r.statut) {
-                case 0:
+                case Start:
                 	System.out.println("Bonjour, la partie commence");
                 	System.out.println("Le mode est : " + r.mode.name());
                 	System.out.println("Vous avez " + r.essai + " essais");
@@ -110,29 +110,29 @@ public class IHM implements Observer {
                 	System.out.println();
                 	break;
                 	
-                case 1:
+                case Tour1:
                 	
                 	System.out.println("Votre réponse est : " + r.reponse);
  	                System.out.println("Vérification : " +r.verif);
  	                break;
  	                
-                case 2:
+                case EnCours:
                 	
                 	System.out.println("Votre réponse est : " + r.reponse);
  	                System.out.println("Vérification : " +r.verif);
  	                break;
                 	
-                case 3:
+                case FinTour:
                 	System.out.println("Fin du tour");
                 	System.out.println("Il vous reste "+r.essai+ " essais.");
                 	System.out.println();
                 	break;
                 	
-				case 4:
+				case Perdu:
 					System.out.println("La partie est perdue...");
 					break;
 					
-				case 5:
+				case Gagné:
 					System.out.println("La partie est gagnée!");
 					break;
 

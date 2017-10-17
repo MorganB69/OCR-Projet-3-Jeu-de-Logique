@@ -6,6 +6,7 @@ import Jeu.Mastermind;
 import Jeu.Mode;
 
 import Jeu.Recherche;
+import Jeu.Statut;
 
 public class Main {
 
@@ -27,7 +28,7 @@ public class Main {
 
 		
 		
-		while(recherche.statut!=6) {
+		while(recherche.statut!=Statut.Fin) {
 
 
 		recherche.DemarrerJeu();
