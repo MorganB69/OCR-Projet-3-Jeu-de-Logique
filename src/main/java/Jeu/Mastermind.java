@@ -1,5 +1,7 @@
 package Jeu;
 
+import java.util.ArrayList;
+
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonM;
 
@@ -60,16 +62,21 @@ public class Mastermind extends Jeu {
 		this.verif="";
 		this.bienPlace=0;
 		this.malPlace=0;
+		ArrayList<Integer> control=new ArrayList<Integer>();
 		for (int i = 0; i < target.getNbCase(); i++) {
 			
 			if (target.getComb().get(i) == reponse.getComb().get(i)) {
 				this.bienPlace++;
+				control.add(reponse.getComb().get(i));
 			} else {
 				for (int k = 0; k < target.getNbCase(); k++) {
 					if (target.getComb().get(k) == reponse.getComb().get(i) && 
 						target.getComb().get(i) != reponse.getComb().get(i)&&
-						target.getComb().get(k) != reponse.getComb().get(k)){
+						target.getComb().get(k) != reponse.getComb().get(k)&&
+						control.contains(reponse.getComb().get(i))==false)
+					{
 						this.malPlace++;
+						control.add(reponse.getComb().get(i));
 						break;
 					}
 				}
