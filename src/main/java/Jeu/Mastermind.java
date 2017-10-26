@@ -62,29 +62,38 @@ public class Mastermind extends Jeu {
 		this.verif="";
 		this.bienPlace=0;
 		this.malPlace=0;
-		ArrayList<Integer> control=new ArrayList<Integer>();
+
+		Combinaison doublon=new CombinaisonM();
+		for (int i = 0; i < target.getNbCase(); i++) {
+			doublon.comb.set(i, -1);
+		}
+		
 		for (int i = 0; i < target.getNbCase(); i++) {
 			
-			if (target.getComb().get(i) == reponse.getComb().get(i)) {
+			if (reponse.getComb().get(i) == target.getComb().get(i)) {
 				this.bienPlace++;
-				control.add(reponse.getComb().get(i));
+				doublon.comb.set(i,reponse.getComb().get(i));
+				
+				
 			} else {
 				for (int k = 0; k < target.getNbCase(); k++) {
-					if (target.getComb().get(k) == reponse.getComb().get(i) && 
-						target.getComb().get(i) != reponse.getComb().get(i)&&
-						target.getComb().get(k) != reponse.getComb().get(k)&&
-						control.contains(reponse.getComb().get(i))==false)
-					{
+					if (reponse.getComb().get(k) == target.getComb().get(i) &&
+						reponse.getComb().get(k)!=doublon.getComb().get(k))
+						 {
 						this.malPlace++;
-						control.add(reponse.getComb().get(i));
+						doublon.comb.set(k,reponse.getComb().get(k));
 						break;
+						
+						
 					}
 				}
 				
 			}
 		}
 		this.verif=this.bienPlace+ " à la bonne place + " +this.malPlace + " à une autre place";
-		
+		if(j.getClass().getName()=="Joueur.Ordinateur") {
+		this.resultat.set(0, this.bienPlace);
+		this.resultat.set(1, this.malPlace);}
 		System.out.println();
 
 	}

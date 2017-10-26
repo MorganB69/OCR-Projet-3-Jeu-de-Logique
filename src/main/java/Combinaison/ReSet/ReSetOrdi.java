@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import Combinaison.Combinaison;
 import IHM.IHM;
+import Jeu.Mode;
+import Jeu.Statut;
 
 public class ReSetOrdi implements ReSet {
 	
-	public void SetComb(Combinaison c,IHM k) {
+	public void SetComb(Combinaison c,IHM k, Mode m, Statut statut) {
 		//Par défaut, donne une combinaison aléatoire
 		for (int i = 0; i < c.getNbCase(); i++) {
 			c.getComb().set(i, (int) (Math.random() * (9 - 0 + 1) + 0));

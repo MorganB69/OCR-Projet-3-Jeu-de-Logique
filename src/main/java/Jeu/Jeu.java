@@ -68,7 +68,7 @@ public abstract class Jeu extends Observable {
 			case Start:
 				//Lancement de la partie
 				//Le défenseur choisit la combinaison secrète
-				this.target.ReSet(this.defenseur,this.i);
+				this.target.ReSet(this.defenseur,this.i,this.mode,this.statut);
 				
 				notifierObservateur();
 				this.statut = Statut.Tour1;
@@ -78,7 +78,7 @@ public abstract class Jeu extends Observable {
 			case Tour1:
 				
 				//Premier tour, l'attaquant donne une combinaison
-				this.reponse.ReSet(attaquant,this.i);
+				this.reponse.ReSet(attaquant,this.i,this.mode,this.statut);
 				
 				//Cette combinaison est vérifiée
 
@@ -152,8 +152,8 @@ public abstract class Jeu extends Observable {
 				
 				case Start:
 					//Lancement de la partie, les deux joueurs donnent une combinaison secrète
-					this.target.ReSet(this.defenseur,this.i);
-					this.target2.ReSet(this.defenseur2,this.i);
+					this.target.ReSet(this.defenseur,this.i,this.mode,this.statut);
+					this.target2.ReSet(this.defenseur2,this.i,this.mode,this.statut);
 					notifierObservateur();
 					this.statut = Statut.Tour1;
 					break;
@@ -162,7 +162,7 @@ public abstract class Jeu extends Observable {
 				case Tour1:
 					//Premier tour
 					//Au premier joueur de jouer.
-					this.reponse.ReSet(attaquant,this.i);
+					this.reponse.ReSet(attaquant,this.i,this.mode,this.statut);
 
 					
 					this.Verification(this.target, this.reponse,this.attaquant);
@@ -186,7 +186,7 @@ public abstract class Jeu extends Observable {
 					//Autres tours
 					
 					//Premier joueur de jouer
-					this.reponse.ReSet(this.attaquant,this.i);
+					this.reponse.ReSet(this.attaquant,this.i,this.mode,this.statut);
 
 					this.Verification(this.target, this.reponse, this.attaquant);
 
@@ -230,7 +230,7 @@ public abstract class Jeu extends Observable {
 					
 				case Tour1J2:	
 					//Au deuxième joueur de jouer
-					this.reponse2.ReSet(attaquant2,this.i);
+					this.reponse2.ReSet(attaquant2,this.i,this.mode,this.statut);
 
 					this.Verification(this.target2, this.reponse2, this.attaquant2);
 

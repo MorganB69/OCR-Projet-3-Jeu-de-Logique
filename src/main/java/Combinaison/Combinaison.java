@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import Config.JeuConfig;
 import IHM.IHM;
+import Jeu.Mode;
+import Jeu.Statut;
 import Joueur.Joueur;
 
 public abstract class Combinaison {
 
-	ArrayList<Integer> comb;
+	public ArrayList<Integer> comb;
 	JeuConfig p;
 	int nbCase;
 	public int[]max;
@@ -47,6 +49,10 @@ public abstract class Combinaison {
 	}
 	
 	public void ReSet(Joueur j,IHM i) {
+
+	}
+	
+	public void ReSet(Joueur j,IHM i,Mode m,Statut s) {
 
 	}
 	

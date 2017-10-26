@@ -14,9 +14,9 @@ public class JeuConfig {
 		Serial s = new Serial("resources","config.properties");
 		
 		
-		//ArrayList<Parametres> list= new ArrayList<Parametres>();
-		//list.add(new Parametres(5,3,4,false));
-		//s.Ecriture(list);
+		ArrayList<Parametres> list= new ArrayList<Parametres>();
+		list.add(new Parametres(5,3,5,true));
+		s.Ecriture(list);
 
 		
 		
