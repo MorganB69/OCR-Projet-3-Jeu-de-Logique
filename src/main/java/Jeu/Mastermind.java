@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonM;
-
+import IHM.IHM;
 import Joueur.Joueur;
 import Joueur.Ordinateur;
 import Joueur.User;
@@ -14,8 +14,8 @@ public class Mastermind extends Jeu {
 	int bienPlace;
 	int malPlace;
 	
-	public Mastermind(Mode mode) {
-		super(mode);
+	public Mastermind(Mode mode, IHM ihm) {
+		super(mode, ihm);
 		// TODO Auto-generated constructor stub
 		
 		this.nomJeu="MasterMind";

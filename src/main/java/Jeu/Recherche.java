@@ -4,6 +4,7 @@ package Jeu;
 
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonR;
+import IHM.IHM;
 import Joueur.Joueur;
 import Joueur.Ordinateur;
 import Joueur.User;
@@ -11,8 +12,8 @@ import Joueur.User;
 public class Recherche extends Jeu {
 
 
-	public Recherche(Mode mode) {
-		super(mode);
+	public Recherche(Mode mode, IHM ihm) {
+		super(mode, ihm);
 		this.nomJeu="Recherche";
 		for(int i=0;i<p.nbCase;i++) this.resultat.add(i,"");
 		

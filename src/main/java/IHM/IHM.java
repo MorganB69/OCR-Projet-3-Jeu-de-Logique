@@ -11,10 +11,10 @@ import Jeu.Recherche;
 
 public class IHM implements Observer {
 	
-	
+	InputControl input;
 	
 	public IHM(){
-		
+		this.input=new InputControl();
 	}
 	
 
@@ -25,6 +25,65 @@ public class IHM implements Observer {
 		System.out.println("|              Recherche de combinaison et MasterMind                          |");
 		System.out.println(" ------------------------------------------------------------------------------");
 		System.out.println();
+	}
+	
+	public int ChoixJeu() {
+		System.out.println();
+		System.out.println(" Veuillez choisir le jeu : ");
+		System.out.println("1 - Jeu Recherche de combinaison");
+		System.out.println("2 - Jeu Mastermind");
+		System.out.println();
+		
+		Scanner sc = new Scanner(System.in);
+		String essai = new String();
+		essai = sc.nextLine();
+		while(input.VerifJeu(essai)!=true) {
+			System.out.println("Erreur dans le choix, veuillez réessayer");
+			essai = sc.nextLine();
+			input.VerifJeu(essai);
+		}
+		int a=Character.getNumericValue(essai.charAt(0));
+		return a;
+	}
+	
+	public int ChoixMode() {
+		System.out.println();
+		System.out.println(" Veuillez choisir le mode de jeu : ");
+		System.out.println("1 - Mode Challenger");
+		System.out.println("2 - Mode Defenseur");
+		System.out.println("3 - Mode Duel");
+		System.out.println();
+		
+		Scanner sc = new Scanner(System.in);
+		String essai = new String();
+		essai = sc.nextLine();
+		while(input.VerifMode(essai)!=true) {
+			System.out.println("Erreur dans le choix, veuillez réessayer");
+			essai = sc.nextLine();
+			input.VerifMode(essai);
+		}
+		int a=Character.getNumericValue(essai.charAt(0));
+		return a;
+	}
+	
+	public int ChoixFin() {
+		System.out.println();
+		System.out.println(" Voulez-vous : ");
+		System.out.println("1 - Recommencer le même jeu avec le même mode?");
+		System.out.println("2 - Choisir un autre jeu ou un autre mode?");
+		System.out.println("3 - Arrêter de jouer?");
+		System.out.println();
+		
+		Scanner sc = new Scanner(System.in);
+		String essai = new String();
+		essai = sc.nextLine();
+		while(input.VerifMode(essai)!=true) {
+			System.out.println("Erreur dans le choix, veuillez réessayer");
+			essai = sc.nextLine();
+			input.VerifMode(essai);
+		}
+		int a=Character.getNumericValue(essai.charAt(0));
+		return a;
 	}
 	
 	public void cls(){
@@ -98,6 +157,7 @@ public class IHM implements Observer {
                 switch (r.statut) {
                 case Start:
                 	System.out.println("Bonjour, la partie commence");
+                	System.out.println("Le jeu est : "+r.nomJeu);
                 	System.out.println("Le mode est : " + r.mode.name());
                 	System.out.println("Vous avez " + r.essai + " essais");
                 	System.out.println("La combinaison est composée de " + r.target.getNbCase() + " chiffres.");

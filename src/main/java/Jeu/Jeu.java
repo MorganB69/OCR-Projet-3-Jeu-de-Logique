@@ -9,7 +9,7 @@ import IHM.IHM;
 import Joueur.Joueur;
 
 public abstract class Jeu extends Observable {
-	String nomJeu;
+	public String nomJeu;
 	JeuConfig p;
 	public int essai;
 	public Boolean dev;
@@ -31,7 +31,7 @@ public abstract class Jeu extends Observable {
 	public String verif;
 	//ArrayList<String> resultat2 = new ArrayList<String>();
 
-	public Jeu(Mode mode) {
+	public Jeu(Mode mode,IHM ihm) {
 
 		nomJeu = "defaut";
 		this.p= new JeuConfig();
@@ -41,8 +41,8 @@ public abstract class Jeu extends Observable {
 		this.statut = Statut.Start;
 		// A CHANGER VIA UNE ENUMERATION
 		this.resultat = new ArrayList<>();
-		this.i= new IHM();
-		i.AfficherAccueil();
+		this.i= ihm;
+		
 		this.addObserver(i);
 		
 	}
@@ -60,7 +60,7 @@ public abstract class Jeu extends Observable {
 		
 			
 			
-		
+			
 			if (this.mode==Mode.Challenger||this.mode==Mode.Defenseur) {
 				
 			//MODE CHALLENGER OU DEFENSEUR
