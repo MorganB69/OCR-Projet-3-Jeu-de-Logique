@@ -114,12 +114,14 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
+		while(input.VerifCombR(essai)!=true) {
+			System.out.println("Erreur dans la combinaison, veuillez réessayer");
+			essai = sc.nextLine();
+			input.VerifCombR(essai);
+		}
 		for (int i = 0; i < c.getNbCase(); i++) {
 			int a = Character.getNumericValue(essai.charAt(i));
-			if (a < 0 || a > 9)
-				System.out.println("Erreur dans la combinaison");
-			else
-				c.getComb().set(i, a);
+			c.getComb().set(i, a);
 	}
 	}
 	
@@ -129,12 +131,14 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
+		while(input.VerifCombM(essai)!=true) {
+			System.out.println("Erreur dans la combinaison, veuillez réessayer");
+			essai = sc.nextLine();
+			input.VerifCombM(essai);
+		}
 		for (int i = 0; i < c.getNbCase(); i++) {
 			int a = Character.getNumericValue(essai.charAt(i));
-			if (a < 0 || a > c.chiffre)
-				System.out.println("Erreur dans la combinaison");
-				
-			else
+
 				c.getComb().set(i, a);
 	}
 	}

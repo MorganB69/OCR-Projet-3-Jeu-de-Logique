@@ -1,8 +1,11 @@
 package IHM;
 
+import Config.JeuConfig;
+
 public class InputControl {
+	JeuConfig p;
 	public InputControl() {
-		
+		this.p=new JeuConfig();
 	}
 	
 	public Boolean VerifJeu(String s) {
@@ -21,5 +24,39 @@ public class InputControl {
 		}
 		
 		else return false;
+	}
+	
+	public Boolean VerifCombR(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			int a = Character.getNumericValue(s.charAt(i));
+			if (a<0||a>9) {
+			System.out.println("Chiffres non compris entre 0 et 9 ou caractère invalide");
+			return false;
+			}	
+			
+		}
+		
+		if (s.length()!=p.nbCase) {
+			System.out.println("Pas le bon nombre de case");
+			return false;
+		}
+		
+		else return true;
+	}
+	
+	public Boolean VerifCombM(String s) {
+		for (int i = 0; i < s.length(); i++) {
+			int a = Character.getNumericValue(s.charAt(i));
+			if (a<0||a>=p.chiffre) {System.out.println("Chiffres non compris entre 0 et "+(p.chiffre-1)+" ou caractère invalide");
+			return false;}	
+			
+		}
+		
+		if (s.length()!=p.nbCase) {
+			System.out.println("Pas le bon nombre de case");
+			return false;
+		}
+		
+		else return true;
 	}
 }
