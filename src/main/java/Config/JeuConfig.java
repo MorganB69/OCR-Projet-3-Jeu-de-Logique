@@ -11,12 +11,12 @@ public class JeuConfig {
 		public JeuConfig(){
 		
 		
-		Serial s = new Serial("resources","config.properties");
+		Serial s = new Serial("/config.properties");
 		
 		
-		ArrayList<Parametres> list= new ArrayList<Parametres>();
-		list.add(new Parametres(5,3,5,true));
-		s.Ecriture(list);
+		//ArrayList<Parametres> list= new ArrayList<Parametres>();
+		//list.add(new Parametres(5,3,5,true));
+		//s.Ecriture(list);
 
 		
 		

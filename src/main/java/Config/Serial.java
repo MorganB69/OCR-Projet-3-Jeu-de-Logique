@@ -8,8 +8,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Serial {
@@ -17,17 +19,17 @@ public class Serial {
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	String p;
-	String d;
+	//String d;
 
-	public Serial(String d,String p) {
+	public Serial(String p) {
 
 		this.p = p;
-		this.d = d;
+		//this.d = d;
 	}
 
 	public void Ecriture(ArrayList<Parametres> p) {
 		try {
-			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.d,this.p))));
+			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.p))));
 
 			
 			oos.writeObject(p);
@@ -55,7 +57,9 @@ public class Serial {
 	public ArrayList<Parametres> Lecture() {
 		ArrayList<Parametres> list = new ArrayList<Parametres>();
 		try {
-			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
+			
+			InputStream is = this.getClass().getResourceAsStream(this.p);
+			ois = new ObjectInputStream(is);
 
 			list = (ArrayList<Parametres>) ois.readObject();
 
@@ -93,7 +97,7 @@ public class Serial {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		try {
-			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.p))));
 			
 			while(ois.available()>0) {
 			list.add(ois.readInt());
@@ -140,7 +144,7 @@ public class Serial {
 	public Boolean RecuperationB() {
 		Boolean b=false;
 		try {
-			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.p))));
 			
 			while(ois.available()>0) {
 			b=(ois.readBoolean());
