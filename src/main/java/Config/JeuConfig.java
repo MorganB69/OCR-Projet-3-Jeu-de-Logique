@@ -11,17 +11,18 @@ public class JeuConfig {
 		public JeuConfig(){
 		
 		
-		Serial s = new Serial("/config.properties");
+		Serial s = new Serial("src/main/resources","/config.properties");
 		
 		
-		//ArrayList<Parametres> list= new ArrayList<Parametres>();
-		//list.add(new Parametres(5,3,5,true));
-		//s.Ecriture(list);
+		ArrayList<Parametres> list= new ArrayList<Parametres>();
+		list.add(new Parametres(12,5,5,true));
+		s.Ecriture(list);
+		
 
 		
 		
 		ArrayList<Parametres> listrecup = new ArrayList<Parametres>();
-		listrecup=s.Lecture();
+		listrecup=s.LectureTest();
 		this.essai=listrecup.get(0).essai;
 		this.nbCase=listrecup.get(0).nbCase;
 		this.chiffre=listrecup.get(0).chiffre;

@@ -38,6 +38,8 @@ public class ReSetOrdiM implements ReSet {
 			
 		this.IA.CalculNbc();
 		
+		if(this.IA.existe.size()+this.IA.confirme.size()!=this.IA.nbcase) {
+		
 		this.IA.VerifCouleur(l.get(0), l.get(1));
 		System.out.println("Verif couleur");
 		for (int j = 0; j < this.IA.position2.size(); j++) {
@@ -65,7 +67,14 @@ public class ReSetOrdiM implements ReSet {
 		for (int j = 0; j < this.IA.position2.size(); j++) {
 			System.out.println(this.IA.position2.get(j));
 		}
-		System.out.println();
+		System.out.println();}
+		
+		else {
+			this.IA.FinalComb(l.get(0), l.get(1));}
+		
+		
+		this.IA.Elimination();
+		this.IA.Elimination2();
 		
 		this.IA.Suppr();
 		System.out.println("Suppr");

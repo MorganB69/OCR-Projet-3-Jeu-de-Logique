@@ -9,6 +9,7 @@ public class IAMaster {
 	public ArrayList<Integer> couleur; 
 	 
 	public ArrayList<Integer> existe;
+	public ArrayList<Integer> combFinal;
 	public ArrayList<Integer> confirme;
 	public ArrayList<ArrayList> position2;
 	public ArrayList<Integer> del;
@@ -18,9 +19,11 @@ public class IAMaster {
 	public int chiffre;
 	public int nbcase;
 	int nbc =0;
-	int existep=0;
+	public int existep=0;
 	int emp =0;
-	int confp=0;
+	public int confp=0;
+
+	public int doublep=0;
 	
 	
 	
@@ -28,6 +31,7 @@ public class IAMaster {
 		
 		this.couleur = new ArrayList<Integer>();
 		this.existe=new ArrayList<Integer>();
+		this.combFinal=new ArrayList<Integer>();
 		this.confirme=new ArrayList<Integer>();
 		this.position2= new ArrayList<ArrayList>();
 		this.del=new ArrayList<Integer>();
@@ -102,25 +106,42 @@ public class IAMaster {
 			
 			
 			//La couleur existe mais mal placée, on supprime la couleur à la position
-			if (m>=existep-b&&existe.size()>0 &&m>0) {
+			if (m>=existep-b&&existe.size()>0 &&m>0&&existep+confp<nbcase) {
 			for (int i = 0; i < existe.size(); i++) {
-				int index=cs.indexOf(existe.get(i));
-				System.out.println("index "+index);
-				if(index!=-1) {
-					System.out.println( " index mal placé est true");
-					System.out.println("position get index"+ position2.get(index));
-				position2.get(index).set(existe.get(i),-1);	
+				int index=-1;
+				try {
+					if(existe.get(i)!=cf.get(cs.indexOf(existe.get(i))))	{	
+						index=cs.indexOf(existe.get(i));}
+						else index=cs.lastIndexOf(existe.get(i));
+						System.out.println("index "+index);
+						if(index!=-1) {
+
+						position2.get(index).set(existe.get(i),-1);	
+						}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
+			
 			}
 			emp++;
 			System.out.println("Existe mal placé");
 			}
 	}
 	
+	
+	
 	public void VerifConfirme(int b, int m) {
 			
 		if ((b>existep&&existe.size()>0&&b+m<=nbc&&emp==0)||(b>=existep&&m<nbc-existep&&b!=0&&existep!=0&&emp==0))	{	
-					int index=cs.indexOf(existe.get(0));
+			int index=-1;
+			try {
+				if(existe.get(0)!=cf.get(cs.indexOf(existe.get(0))))	{	
+					index=cs.indexOf(existe.get(0));}
+					else index=cs.lastIndexOf(existe.get(0));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 				
 				
 				System.out.println("index "+index);
@@ -146,6 +167,9 @@ public class IAMaster {
 				for (int i = 0; i < existe.size(); i++) {
 					if (existe.get(0)==existe.get(i))existedouble++;
 				}
+				for (int i = 0; i < confirme.size(); i++) {
+					if (existe.get(0)==confirme.get(i))existedouble++;
+				}
 				if (existedouble==1) {
 					for (int i1 = 0; i1 <position2.size() ; i1++) {
 						if(i1!=index)position2.get(i1).set(existe.get(0), -1);
@@ -155,6 +179,7 @@ public class IAMaster {
 				System.out.println("confirmé : "+existe.get(0) + " a la position : "+index);
 				cf.set(index,existe.get(0));
 				confirme.add(existe.get(0));
+				existe.remove(0);
 				confp++;
 				del.add(hyp);
 			}	
@@ -163,7 +188,7 @@ public class IAMaster {
 	}
 	public void VerifExiste(int b, int m) {
 		if((b+m)>=nbc) {
-			if(existe.size()+confirme.size()-confp<nbcase)for (int i = 0;i<=(b+m)-nbc;i++)existe.add(hyp);
+			if(existe.size()+confirme.size()-confp<nbcase)for (int i = 0;i<=(b+m)-nbc-doublep;i++)existe.add(hyp);
 			System.out.println("Couleur Existe :" +hyp);
 			del.add(hyp);
 			}
@@ -190,6 +215,7 @@ public class IAMaster {
 					}System.out.println("confirmé si autre couleur existe pas : "+existe.get(i11)+ " position : "+index);
 					cf.set(index,existe.get(i11));
 					confirme.add(existe.get(i11));
+					existe.remove(i11);
 					del.add(hyp);
 					break;
 					}
@@ -200,7 +226,7 @@ public class IAMaster {
 	}
 	
 	public void VerifMalp(int b, int m) {
-		if(m==(nbc-confirme.size()-b) && m!=0 && b==confirme.size()){
+		if(m==(nbc+doublep-confp) && m!=0 && b==confp){
 			for (int i = 0; i < position2.size(); i++) {
 				if(cs.get(i)!=cf.get(i))position2.get(i).set(cs.get(i),-1);
 				System.out.println("Mal placé supprimé à chaque position");
@@ -208,6 +234,48 @@ public class IAMaster {
 			}
 		}
 	}
+	
+	public void Elimination() {
+		
+		for (int i = 0; i < position2.size(); i++) {
+			int c=0;
+			for (int j = 0; j < position2.get(i).size(); j++) {
+				if((int)position2.get(i).get(j)!=-1)c++;
+			}
+			if(c==1) {
+				for (int j = 0; j < position2.get(i).size(); j++) {
+					if((int)position2.get(i).get(j)!=-1&&(int)position2.get(i).get(j)!=cf.get(i)){
+						confirme.add((int)position2.get(i).get(j));
+						cf.set(i,(int)position2.get(i).get(j));
+						System.out.println("Confirmé par élinimation : "+(int)position2.get(i).get(j)+" position : "+i);
+					}
+				}
+			}
+			
+		}
+	}
+	
+public void Elimination2() {
+		
+		for (int i = 0; i < position2.get(0).size(); i++) {
+			int c=0;
+			for (int j = 0; j < position2.size(); j++) {
+				if((int)position2.get(j).get(i)!=-1)c++;
+			}
+			if(c==1) {
+				for (int j = 0; j < position2.size(); j++) {
+					if((int)position2.get(j).get(i)!=-1&&(int)position2.get(j).get(i)!=cf.get(j)){
+						confirme.add((int)position2.get(j).get(i));
+						cf.set(j,(int)position2.get(j).get(i));
+						System.out.println("Confirmé par élinimation 2 : "+(int)position2.get(j).get(i)+" position : "+j);
+					}
+				}
+			}
+			
+		}
+	}
+
+
 	
 	public void Suppr() {
 		int c=0;
@@ -241,6 +309,9 @@ public class IAMaster {
 				for (int i = 0; i < existe.size(); i++) {
 					if (existe.get(0)==existe.get(i))existedouble++;
 				}
+				for (int i = 0; i < confirme.size(); i++) {
+					if (existe.get(0)==confirme.get(i))existedouble++;
+				}
 				if (existedouble==1) {
 					for (int i11 = 0; i11 <position2.size() ; i11++) {
 						if(i11!=posi)position2.get(i11).set((int) b1, -1);
@@ -250,15 +321,104 @@ public class IAMaster {
 			System.out.println("Un confirmé donc suppressions sur ligne et position");
 			System.out.println("confirmé");
 			
-			confirme.add((int) b1);
-			cf.set(posi,(int) b1);
+			//confirme.add((int) b1);
+			
+			//cf.set(posi,(int) b1);
 		}
 	}
+	
+	public void FinalComb(int b, int m) {
+		int count=0;
+		if(confirme.size()+existe.size()==nbcase) {
+			for (int i = 0; i < position2.size(); i++) {
+				if (cf.get(i)==-1) {
+					for (int j = 0; j < position2.get(i).size(); j++) {
+						for (int j2 = 0; j2 < existe.size(); j2++) {
+							if(position2.get(i).get(j)==existe.get(j2))count++;
+						}
+						if(count==0)position2.get(i).set(j,-1);
+					}
+				}
+			}
+			
+			
+			if( b-confp>=2) {
+				int index=-1;
+				try {
+					if(combFinal.get(0)!=cf.get(cs.indexOf(combFinal.get(0))))	{	
+						index=cs.indexOf(combFinal.get(0));}
+						else index=cs.lastIndexOf(combFinal.get(0));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				System.out.println("index "+index);
+				
+				if(index!=-1) {
+				for (int i1 = 0; i1 <position2.size() ; i1++) {
+					if(i1==index) {
+						
+					for (int k = 0; k < position2.get(i1).size(); k++) {
+				
+						if( position2.get(i1).get(k)!=(combFinal.get(0)))
+							position2.get(i1).set(k,-1);
+							
+						}
+					
+				
+				}
+					
+				}
+				int existedouble=0;
+				for (int i = 0; i < existe.size(); i++) {
+					if (combFinal.get(0)==existe.get(i))existedouble++;
+				}
+				for (int i = 0; i < confirme.size(); i++) {
+					if (combFinal.get(0)==confirme.get(i))existedouble++;
+				}
+				if (existedouble==1) {
+					for (int i1 = 0; i1 <position2.size() ; i1++) {
+						if(i1!=index)position2.get(i1).set(combFinal.get(0), -1);
+					}
+				}
+				
+				//System.out.println("confirmé : "+existe.get(0) + " a la position : "+index);
+				}
+				cf.set(index,combFinal.get(0));
+				confirme.add(combFinal.get(0));
+				confp++;
+			}
+			
+			
+			
+			
+			else 
+				
+				if (m>=2) {
+					int index=-1;
+					try {
+						if(combFinal.get(0)!=cf.get(cs.indexOf(combFinal.get(0))))	{	
+							index=cs.indexOf(combFinal.get(0));}
+							else index=cs.lastIndexOf(combFinal.get(0));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					cf.set(index,hyp);
+					confirme.add(hyp);
+					confp++;
+				}
+			
+			else position2.get(cs.indexOf(combFinal.get(0))).set(combFinal.get(0),-1);
+		}
+			
+		
+	}
+
 	
 	public void HypReset(){
 		
 		couleur.removeAll(del);
 		int countremove=0;
+
 		for (int i = 0; i < confirme.size(); i++) {
 			for (int k = 0; k < existe.size(); k++) {
 				if (confirme.get(i)==existe.get(k)&&countremove<1) {
@@ -267,12 +427,15 @@ public class IAMaster {
 				}
 			}
 		}
+		System.out.println("couleurs hyp : "+couleur);
 		emp=0;
 		nbc =0;
 		existep=0;
 		emp =0;
 		confp=0;
+		doublep=0;
 		
+		combFinal.clear();
 		
 		if (couleur.size()>0&&existe.size()+confirme.size()<nbcase)hyp=couleur.get((int) (Math.random() * (couleur.size() - 0) + 0));
 		else try {
@@ -289,7 +452,7 @@ public class IAMaster {
 		for (int i = 0; i < res.length; i++) {
 			res[i]=existe.get(i);
 		}
-		
+		int quitter=0;
 		
 		for(int i=0;i<nbcase;i++) {
 			int o=0;
@@ -298,11 +461,45 @@ public class IAMaster {
 			if(cf.get(i)!=-1) {
 				cs.set(i, cf.get(i));
 				System.out.println("placer dans comb un confirmé + position : "+i);
+				confp++;
 			}
 				else 
 					if(existe.size()>k) {
 						if(existe.size()+confirme.size()==nbcase) {
-						int quitter=0;
+							
+							
+							if(quitter==1) {
+								for (int j = 0; j < existe.size(); j++) {
+									if(existe.get(j)!=combFinal.get(0)) {
+										hyp=existe.get(j);
+										cs.set(i, hyp);
+										System.out.println("placer hyp finale");
+										existep++;
+										break;
+									}
+								}
+							}
+							else {
+							
+							for (int j = 0; j < position2.get(i).size(); j++) {
+								if((int)position2.get(i).get(j)!=-1) {
+									cs.set(i,(int) position2.get(i).get(j));
+									System.out.println("placer existant si possible final");
+									combFinal.add((int)position2.get(i).get(j));
+									existep++;
+									k++;
+									for (int i1 = 0; i1 < confirme.size(); i1++) {
+										if (combFinal.get(0)==confirme.get(i1))doublep++;
+									}
+									quitter=1;
+									break;
+								}
+							}
+							
+							}
+							
+							/*if(quitter==1) cs.set(i, hyp);
+						else
 						for (int l = 0; l < existe.size(); l++) {
 							
 							if (quitter==1) break;
@@ -313,6 +510,18 @@ public class IAMaster {
 									k++;
 									System.out.println("Placer dans comb un existant + position : "+i);
 									existep++;
+									
+									for (int i1 = 0; i1 < confirme.size(); i1++) {
+										if (existe.get(l)==confirme.get(i1))doublep++;
+									}
+									int h=l+1;
+									if(h<existe.size()) {
+									for (int j = 0; j < position2.get(i).size(); j++) {
+										
+										if(existe.get(h).equals(position2.get(i).get(j))==true)hyp=h;
+										else if(h<existe.size()-1)h++;
+									}}
+								
 									quitter=1;
 									break;
 									
@@ -324,18 +533,19 @@ public class IAMaster {
 								
 							}
 							
-						}
+						}*/
 						}
 						else {for (int l2 = 0; l2 < position2.get(i).size(); l2++) {
-							System.out.println("existe 0 : "+existe.get(0));
-							System.out.println("chiffre sur position : "+ position2.get(i).get(l2));
-							System.out.println("k : "+ k);
+
 							if((int)existe.get(0)==(int)position2.get(i).get(l2)&&k<1) {
 								cs.set(i, existe.get(0));
 								
 								k++;
 								System.out.println("Placer dans comb un existant + position : "+i);
 								existep++;
+								for (int i1 = 0; i1 < confirme.size(); i1++) {
+									if (existe.get(0)==confirme.get(i1))doublep++;
+								}
 								break;
 								
 								
@@ -355,5 +565,16 @@ public class IAMaster {
 					
 					
 		}
+		System.out.println("Existe : ");	
+		for (int j = 0; j < existe.size(); j++) {
+			System.out.print(existe.get(j));
+			System.out.println();
+		}
+		System.out.println("Confirmé : ");	
+		for (int j = 0; j < confirme.size(); j++) {
+			System.out.print(confirme.get(j));
+			System.out.println();
+		}
+		
 	}
 }

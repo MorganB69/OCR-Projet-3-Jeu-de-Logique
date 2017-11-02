@@ -19,20 +19,20 @@ public class Serial {
 	ObjectInputStream ois;
 	ObjectOutputStream oos;
 	String p;
-	//String d;
+	String d;
 
-	public Serial(String p) {
+	public Serial(String d,String p) {
 
 		this.p = p;
-		//this.d = d;
+		this.d = d;
 	}
 
-	public void Ecriture(ArrayList<Parametres> p) {
+	public void Ecriture(ArrayList<Parametres> par) {
 		try {
-			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.p))));
-
+			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.d,this.p))));
 			
-			oos.writeObject(p);
+			
+			oos.writeObject(par);
 			
 			
 
@@ -52,17 +52,56 @@ public class Serial {
 
 	}
 
+    
+    public ArrayList<Parametres> LectureTest() {
+		ArrayList<Parametres> list = new ArrayList<Parametres>();
+		try {
+			
+			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d,this.p))));
 
+			list = (ArrayList<Parametres>) ois.readObject();
+			
+
+		}
+
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		}
+
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			// On ferme nos flux de données dans un bloc finally 
+
+			try {
+				if (ois != null)
+					ois.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return list;
+	}
 
 	public ArrayList<Parametres> Lecture() {
 		ArrayList<Parametres> list = new ArrayList<Parametres>();
 		try {
 			
 			InputStream is = this.getClass().getResourceAsStream(this.p);
+			
+			
 			ois = new ObjectInputStream(is);
 
 			list = (ArrayList<Parametres>) ois.readObject();
-
+			
 
 		}
 
