@@ -7,10 +7,19 @@ import IHM.IHM;
 import Jeu.Mode;
 import Jeu.Statut;
 
+/**
+ * Classe implémentant les méthodes ReSet de l'ordinateur pour le jeu Recherche
+ * @author Morgan
+ *
+ */
 public class ReSetOrdi implements ReSet {
 	
+	/* (non-Javadoc)
+	 * Par défaut génère une combinaison aléatoire
+	 * @see Combinaison.ReSet.ReSet#SetComb(Combinaison.Combinaison, IHM.IHM, Jeu.Mode, Jeu.Statut)
+	 */
 	public void SetComb(Combinaison c,IHM k, Mode m, Statut statut) {
-		//Par défaut, donne une combinaison aléatoire
+		
 		for (int i = 0; i < c.getNbCase(); i++) {
 			c.getComb().set(i, (int) (Math.random() * (9 - 0 + 1) + 0));
 		}
@@ -18,9 +27,18 @@ public class ReSetOrdi implements ReSet {
 	
 	
 	
+	/**
+	 * En fonction du résultat précédent, adapte la combinaison en fixant un nouveau max et min
+	 * @param c
+	 * 		La combinaison à changer
+	 * @param j
+	 * 		Le joueur qui doit changer sa combinaison
+	 * @param k
+	 * 		L'interface utilisée
+	 */
 	public void SetComb(Combinaison c,ArrayList<String> j, IHM k) {
 		
-		//En fonction du résultat précédent, adapte la combinaison en fixant un nouveau max et min.
+		
 		for (int i = 0; i < c.getNbCase(); i++) {
 			
 			
@@ -41,16 +59,21 @@ public class ReSetOrdi implements ReSet {
 		}
 	}
 	
+	/**
+	 * Par défaut, donne une combinaison aléatoire
+	 * @param c
+	 * 		La combinaison à changer
+	 * @param k
+	 * 		L'interface utilisée
+	 */
 	public void SetCombM(Combinaison c, IHM k) {
-		//Par défaut, donne une combinaison aléatoire
+		
 				for (int i = 0; i < c.getNbCase(); i++) {
 					c.getComb().set(i, (int) (Math.random() * (c.chiffre - 0 + 1) + 0));
 				}
 	}
 	
-	public void SetCombM(Combinaison c,ArrayList<Integer> j, IHM k) {
-		
-	}
+
 
 }
 
