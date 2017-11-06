@@ -1,3 +1,5 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import IHM.IHM;
 import Jeu.Jeu;
@@ -7,6 +9,8 @@ import Jeu.Mode;
 import Jeu.Recherche;
 import Jeu.Statut;
 
+
+
 /**
  * Classe Main
  * 
@@ -14,7 +18,9 @@ import Jeu.Statut;
  *
  */
 public class Main {
-
+	
+	private static final Logger logger = LogManager.getLogger(Main.class);
+	
 	/**
 	 * Méthode main qui instancie une nouvelle IHM et un nouveau jeu
 	 * 
@@ -22,6 +28,9 @@ public class Main {
 	 *            Définit si mode développeur activé ou non
 	 */
 	public static void main(String[] args) {
+		
+		logger.traceEntry("Démarrage de l'application");
+		
 		//Si false, quitte le jeu
 		Boolean lancementjeu = true;
 		//Si true, relance le même jeu et même mode

@@ -362,6 +362,15 @@ public class IAMaster {
 					if ((int) position.get(i).get(j) != -1 && (int) position.get(i).get(j) != combConfirm.get(i)) {
 						confirme.add((int) position.get(i).get(j));
 						combConfirm.set(i, (int) position.get(i).get(j));
+						int countremove = 0;
+
+						
+						for (int k = 0; k < existe.size(); k++) {
+							if ((int) position.get(i).get(j)== existe.get(k) && countremove < 1) {
+								existe.remove(k);
+								countremove++;
+							}
+						}
 						System.out.println(
 								"Confirmé par élinimation : " + (int) position.get(i).get(j) + " position : " + i);
 					}
@@ -387,6 +396,15 @@ public class IAMaster {
 					if ((int) position.get(j).get(i) != -1 && (int) position.get(j).get(i) != combConfirm.get(j)) {
 						confirme.add((int) position.get(j).get(i));
 						combConfirm.set(j, (int) position.get(j).get(i));
+						int countremove = 0;
+
+						
+						for (int k = 0; k < existe.size(); k++) {
+							if ((int) position.get(j).get(i)== existe.get(k) && countremove < 1) {
+								existe.remove(k);
+								countremove++;
+							}
+						}
 						System.out.println(
 								"Confirmé par élinimation 2 : " + (int) position.get(j).get(i) + " position : " + j);
 					}
@@ -401,7 +419,19 @@ public class IAMaster {
 	 */
 	@SuppressWarnings("unchecked")
 	public void Suppr() {
-		int c = 0;
+		
+		for (int i = 0; i < position.size(); i++) {
+			if(combConfirm.get(i)!=-1) {
+				for (int j = 0; j < position.get(i).size(); j++) {
+					if(position.get(i).get(j)!=combConfirm.get(i))position.get(i).set(j, -1);
+				}
+			}
+			
+		}
+		
+
+		
+		/*int c = 0;
 		Object b1 = 0;
 		int posi = 0;
 
@@ -448,7 +478,7 @@ public class IAMaster {
 			// confirme.add((int) b1);
 
 			// cf.set(posi,(int) b1);
-		}
+		}*/
 	}
 
 	/**
@@ -464,7 +494,7 @@ public class IAMaster {
 	public void FinalComb(int b, int m) {
 		int count = 0;
 		if (confirme.size() + existe.size() == nbcase) {
-			for (int i = 0; i < position.size(); i++) {
+			/*for (int i = 0; i < position.size(); i++) {
 				if (combConfirm.get(i) == -1) {
 					for (int j = 0; j < position.get(i).size(); j++) {
 						for (int j2 = 0; j2 < existe.size(); j2++) {
@@ -473,9 +503,10 @@ public class IAMaster {
 						}
 						if (count == 0)
 							position.get(i).set(j, -1);
+						System.out.println("suppr hyp non ds comb final");
 					}
 				}
-			}
+			}*/
 
 			if (b - confp >= 2) {
 				int index = -1;
@@ -519,10 +550,21 @@ public class IAMaster {
 						}
 					}
 
-					// System.out.println("confirmé : "+existe.get(0) + " a la position : "+index);
+					 System.out.println("confirmé final : "+combFinal.get(0) + " a la position : "+index +"double : "+existedouble);
 				}
 				combConfirm.set(index, combFinal.get(0));
 				confirme.add(combFinal.get(0));
+				int countremove = 0;
+
+				
+					for (int k = 0; k < existe.size(); k++) {
+						if (combFinal.get(0) == existe.get(k) && countremove < 1) {
+							existe.remove(k);
+							countremove++;
+						}
+					}
+				
+				
 				confp++;
 			}
 
@@ -538,13 +580,25 @@ public class IAMaster {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
+				System.out.println("confirmé final par élmimination");
 				combConfirm.set(index, hyp);
 				confirme.add(hyp);
+				int countremove = 0;
+
+				
+				for (int k = 0; k < existe.size(); k++) {
+					if (hyp == existe.get(k) && countremove < 1) {
+						existe.remove(k);
+						countremove++;
+					}
+				}
+				
 				confp++;
 			}
 
 			else
 				position.get(combRecherche.indexOf(combFinal.get(0))).set(combFinal.get(0), -1);
+				System.out.println("élimination ");
 		}
 
 	}
@@ -553,18 +607,43 @@ public class IAMaster {
 	 * Remise à zero des hypothèses utilisées pour le prochain tour
 	 */
 	public void HypReset() {
+		int count=0;
 
+		
+		
+		
 		couleur.removeAll(del);
 		int countremove = 0;
 
-		for (int i = 0; i < confirme.size(); i++) {
+		/*for (int i = 0; i < confirme.size(); i++) {
 			for (int k = 0; k < existe.size(); k++) {
 				if (confirme.get(i) == existe.get(k) && countremove < 1) {
 					existe.remove(k);
 					countremove++;
 				}
 			}
+		}*/
+		
+		if (confirme.size() + existe.size() == nbcase) {
+			for (int i = 0; i < position.size(); i++) {
+				if (combConfirm.get(i) == -1) {
+					for (int j = 0; j < position.get(i).size(); j++) {
+						count=0;
+						for (int j2 = 0; j2 < existe.size(); j2++) {
+							if ((int)position.get(i).get(j) == (int)existe.get(j2))
+								count++;
+						}
+						if (count == 0) {
+							position.get(i).set(j, -1);
+							System.out.println("suppr hyp non ds comb finale"+i+j);
+							count=0;
+						}
+						
+					}
+				}
+			}
 		}
+		
 		System.out.println("couleurs hyp : " + couleur);
 		emp = 0;
 		nbc = 0;
