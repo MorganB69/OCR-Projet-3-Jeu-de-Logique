@@ -8,256 +8,333 @@ import Config.JeuConfig;
 import IHM.IHM;
 import Joueur.Joueur;
 
+/**
+ * Classe abstraite d'un jeu et implémentant un observable pour l'IHM
+ * @author Morgan
+ *
+ */
+/**
+ * @author Morgan
+ *
+ */
 public abstract class Jeu extends Observable {
-	String nomJeu;
+	/**
+	 * Nom du Jeu
+	 */
+	public String nomJeu;
+	/**
+	 * Classe des paramètres du jeu
+	 */
 	JeuConfig p;
+	/**
+	 * Nombre d'essai
+	 */
 	public int essai;
+	/**
+	 * Mode développeur
+	 */
 	public Boolean dev;
+	/**
+	 * Combinaison à trouver pour le joueur 1
+	 */
 	public Combinaison target;
+	/**
+	 * Combinaison à trouver pour le joueur 2 (Mode duel)
+	 */
 	public Combinaison target2;
+	/**
+	 * Combinaison donnée par le joueur 1
+	 */
 	public Combinaison reponse;
+	/**
+	 * Combinaison donnée par le joueur 2 (Mode duel)
+	 */
 	public Combinaison reponse2;
+	/**
+	 * Joueur attaquant 1
+	 */
 	public Joueur attaquant;
+	/**
+	 * Joueur attaquant 2 (Mode duel)
+	 */
 	public Joueur attaquant2;
+	/**
+	 * Joueur défenseur 1
+	 */
 	public Joueur defenseur;
+	/**
+	 * Joueur défenseur 2 (Mode duel)
+	 */
 	public Joueur defenseur2;
+	/**
+	 * IHM implémentée dans le jeu
+	 */
 	public IHM i;
-	
-	
-	public int statut;
-	public Mode mode;
-	public ArrayList<String> resultat;
-	public String verif;
-	//ArrayList<String> resultat2 = new ArrayList<String>();
 
-	public Jeu(Mode mode) {
+	/**
+	 * Définit le statut du déroulement la partie
+	 */
+	public Statut statut;
+	/**
+	 * Mode de jeu
+	 */
+	public Mode mode;
+	/**
+	 * Résultat après vérification de la combinaison
+	 */
+	@SuppressWarnings("rawtypes")
+	public ArrayList resultat;
+
+	/**
+	 * Utilisée pour la vérification de la combinaison
+	 */
+	public String verif;
+
+	/**
+	 * Constructeur du jeu
+	 * 
+	 * @param mode
+	 *            mode choisi
+	 * @param ihm
+	 *            implémentation de l'IHM
+	 */
+	public Jeu(Mode mode, IHM ihm) {
 
 		nomJeu = "defaut";
-		this.p= new JeuConfig();
+		this.p = new JeuConfig();
 		this.mode = mode;
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
-		this.dev=p.dev;
-		this.statut = 0;// A CHANGER VIA UNE ENUMERATION
-		this.resultat = new ArrayList<String>();
-		this.i= new IHM();
-		i.AfficherAccueil();
+		this.dev = p.dev;
+		this.statut = Statut.Start;
+		// A CHANGER VIA UNE ENUMERATION
+		this.resultat = new ArrayList<>();
+		this.i = ihm;
+
 		this.addObserver(i);
-		
+
 	}
 
+	/**
+	 * Vérifie la combinaison donnée par le joueur
+	 * 
+	 * @param target
+	 *            Combinaison à trouver
+	 * @param reponse
+	 *            Combinaison donnée par le joueur
+	 * @param attaquant
+	 *            Le joueur qui a donné la combinaison
+	 */
 	public void Verification(Combinaison target, Combinaison reponse, Joueur attaquant) {
 
 	}
-	
+
+	/**
+	 * Méthode permettant à l'observer d'obtenir les changements d'état du jeu
+	 */
 	public void notifierObservateur() {
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Lancement de la partie en fonction du mode Le statut de la partie évolue et
+	 * au fur et à mesure de la partie L'observer est tenu au courant des
+	 * changements d'état
+	 */
+	@SuppressWarnings("unchecked")
 	public void DemarrerJeu() {
-		
-			
-			
-		
-			if (this.mode==Mode.Challenger||this.mode==Mode.Defenseur) {
-				
-			//MODE CHALLENGER OU DEFENSEUR
-			switch (this.statut) {
-			case 0:
-				//Lancement de la partie
-				//Le défenseur choisit la combinaison secrète
-				this.target.ReSet(this.defenseur,this.i);
-				
-				notifierObservateur();
-				this.statut = 1;
-				break;
-				
 
-			case 1:
-				
-				//Premier tour, l'attaquant donne une combinaison
-				this.reponse.ReSet(attaquant,this.i);
-				
-				//Cette combinaison est vérifiée
+		if (this.mode == Mode.Challenger || this.mode == Mode.Defenseur) {
+
+			// MODE CHALLENGER OU DEFENSEUR
+			switch (this.statut) {
+			case Start:
+				// Lancement de la partie
+				// Le défenseur choisit la combinaison secrète
+				this.target.ReSet(this.defenseur, this.i, this.mode, this.statut);
+
+				notifierObservateur();
+				this.statut = Statut.Tour1;
+				break;
+
+			case Tour1:
+
+				// Premier tour, l'attaquant donne une combinaison
+				this.reponse.ReSet(attaquant, this.i, this.mode, this.statut);
+
+				// Cette combinaison est vérifiée
 
 				this.Verification(this.target, this.reponse, this.attaquant);
 
 				notifierObservateur();
 
-				if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
-				//Si la combinaison est bonne, la partie est gagnée sinon fin du tour
-				
-						
-				else this.statut = 3;
+				if (this.reponse.getComb().equals(this.target.getComb()))
+					this.statut = Statut.Gagné;
+				// Si la combinaison est bonne, la partie est gagnée sinon fin du tour
+
+				else
+					this.statut = Statut.FinTour;
 				break;
-						
-					
-				
-			case 2:
-				//Autres tours
-				//L'attaquant change sa combinaison, en prenant en paramètre le résultat précédent
-				//pour adapter sa future combinaison (Utile pour l'ordinateur)
-				
+
+			case EnCours:
+				// Autres tours
+				// L'attaquant change sa combinaison, en prenant en paramètre le résultat
+				// précédent
+				// pour adapter sa future combinaison (Utile pour l'ordinateur)
+
 				this.reponse.ReSet(this.attaquant, this.resultat, this.i);
 
 				this.Verification(this.target, this.reponse, this.attaquant);
 
-				
 				notifierObservateur();
 
 				if (this.reponse.getComb().equals(this.target.getComb())) {
-					this.statut = 5;
-					
-				}
-				else 
-					this.statut = 3;
+					this.statut = Statut.Gagné;
+
+				} else
+					this.statut = Statut.FinTour;
 				break;
-						
-					
-				
-			case 3:
-				//Fin du tour, on décrémente essai. Si on arrive à 0, la partie est perdue sinon autre tour
+
+			case FinTour:
+				// Fin du tour, on décrémente essai. Si on arrive à 0, la partie est perdue
+				// sinon autre tour
 				this.essai--;
 				notifierObservateur();
 
-				if(this.essai == 0) this.statut = 4;
+				if (this.essai == 0)
+					this.statut = Statut.Perdu;
 				else
-				 this.statut=2;
+					this.statut = Statut.EnCours;
 				break;
-				
-			case 4:
-				//La partie est perdue. Fin de la partie.
+
+			case Perdu:
+				// La partie est perdue. Fin de la partie.
 
 				notifierObservateur();
-				this.statut=6;
-				
+				this.statut = Statut.Fin;
+
 				break;
-				
-			case 5:
-				//La partie est gagnée. Fin de la partie.
+
+			case Gagné:
+				// La partie est gagnée. Fin de la partie.
 
 				notifierObservateur();
-				this.statut=6;
-				
+				this.statut = Statut.Fin;
+
 				break;
-				
+
 			}
-			}
-			
-			else {
-				//MODE DUEL
-				switch (this.statut) {
-				
-				case 0:
-					//Lancement de la partie, les deux joueurs donnent une combinaison secrète
-					this.target.ReSet(this.defenseur,this.i);
-					this.target2.ReSet(this.defenseur2,this.i);
-					notifierObservateur();
-					this.statut = 1;
-					break;
-					
+		}
 
-				case 1:
-					//Premier tour
-					//Au premier joueur de jouer.
-					this.reponse.ReSet(attaquant,this.i);
+		else {
+			// MODE DUEL
+			switch (this.statut) {
 
-					
-					this.Verification(this.target, this.reponse,this.attaquant);
-
-					notifierObservateur();
-
-
-					if (this.reponse.getComb().equals(this.target.getComb())) this.statut = 5;
-					
-					
-							
-					else this.statut = 7;
-					
-					break;
-					
-
-							
-						
-					
-				case 2:
-					//Autres tours
-					
-					//Premier joueur de jouer
-					this.reponse.ReSet(this.attaquant,this.i);
-
-					this.Verification(this.target, this.reponse, this.attaquant);
-
-					notifierObservateur();
-					if (this.reponse.getComb().equals(this.target.getComb())) {
-						this.statut = 5;
-						
-					}
-					
-							else this.statut=8;
-								
-					break;
-										
-				case 3:
-				//	Fin du tour, on décrémente essai
-					this.essai--;
-
-					notifierObservateur();
-					if(this.essai == 0)
-						this.statut = 4;
-					else {
-				
-					this.statut=2;}
-					break;
-					
-				case 4:
-				//	La partie est perdue
-
-					notifierObservateur();
-					this.statut=6;
-					
-					break;
-					
-				case 5:
-				//	La partie est gagnée.
-
-					notifierObservateur();
-					this.statut=6;
-					
-					break;
-					
-				case 7:	
-					//Au deuxième joueur de jouer
-					this.reponse2.ReSet(attaquant2,this.i);
-
-					this.Verification(this.target2, this.reponse2, this.attaquant2);
-
-					notifierObservateur();
-					if (this.reponse2.getComb().equals(this.target2.getComb())) this.statut = 5;
-					
-					else
-					
-					this.statut = 3;
-				
+			case Start:
+				// Lancement de la partie, les deux joueurs donnent une combinaison secrète
+				this.target.ReSet(this.defenseur, this.i, this.mode, this.statut);
+				this.target2.ReSet(this.defenseur2, this.i, this.mode, this.statut);
+				notifierObservateur();
+				this.statut = Statut.Tour1;
 				break;
-				
-				case 8:
-					//Deuxième joueur de jouer.
-					this.reponse2.ReSet(this.attaquant2, this.resultat,this.i);
 
-					
-					this.Verification(this.target2, this.reponse2, this.attaquant2);
+			case Tour1:
+				// Premier tour
+				// Au premier joueur de jouer.
+				this.reponse.ReSet(attaquant, this.i, this.mode, this.statut);
 
-					notifierObservateur();
-					if (this.reponse2.getComb().equals(this.target2.getComb())) {
-						this.statut = 5;	
-					}
-					else this.statut = 3;
-					
-				break;	
+				this.Verification(this.target, this.reponse, this.attaquant);
+
+				notifierObservateur();
+
+				if (this.reponse.getComb().equals(this.target.getComb()))
+					this.statut = Statut.Gagné;
+
+				else
+					this.statut = Statut.Tour1J2;
+
+				break;
+
+			case EnCours:
+				// Autres tours
+
+				// Premier joueur de jouer
+				this.reponse.ReSet(this.attaquant, this.i, this.mode, this.statut);
+
+				this.Verification(this.target, this.reponse, this.attaquant);
+
+				notifierObservateur();
+				if (this.reponse.getComb().equals(this.target.getComb())) {
+					this.statut = Statut.Gagné;
+
 				}
-			}
-	//}
 
-}
+				else
+					this.statut = Statut.EnCoursJ2;
+
+				break;
+
+			case FinTour:
+				// Fin du tour, on décrémente essai
+				this.essai--;
+
+				notifierObservateur();
+				if (this.essai == 0)
+					this.statut = Statut.Perdu;
+				else {
+
+					this.statut = Statut.EnCours;
+				}
+				break;
+
+			case Perdu:
+				// La partie est perdue
+
+				notifierObservateur();
+				this.statut = Statut.Fin;
+
+				break;
+
+			case Gagné:
+				// La partie est gagnée.
+
+				notifierObservateur();
+				this.statut = Statut.Fin;
+
+				break;
+
+			case Tour1J2:
+				// Au deuxième joueur de jouer
+				this.reponse2.ReSet(attaquant2, this.i, this.mode, this.statut);
+
+				this.Verification(this.target2, this.reponse2, this.attaquant2);
+
+				notifierObservateur();
+				if (this.reponse2.getComb().equals(this.target2.getComb()))
+					this.statut = Statut.Gagné;
+
+				else
+
+					this.statut = Statut.FinTour;
+
+				break;
+
+			case EnCoursJ2:
+				// Deuxième joueur de jouer.
+				this.reponse2.ReSet(this.attaquant2, this.resultat, this.i);
+
+				this.Verification(this.target2, this.reponse2, this.attaquant2);
+
+				notifierObservateur();
+				if (this.reponse2.getComb().equals(this.target2.getComb())) {
+					this.statut = Statut.Gagné;
+				} else
+					this.statut = Statut.FinTour;
+
+				break;
+			}
+		}
+		// }
+
+	}
 }
