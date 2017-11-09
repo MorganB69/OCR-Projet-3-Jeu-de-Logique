@@ -30,6 +30,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		logger.traceEntry("Démarrage de l'application");
+		logger.traceExit("Fin de l'application");
+		logger.info("Mise en place de log4J en phase de test");
 		
 		//Si false, quitte le jeu
 		Boolean lancementjeu = true;
@@ -37,6 +39,7 @@ public class Main {
 		Boolean continuer = false;
 		//Variable pour le choix du jeu
 		int ChoixJeu = 0;
+		logger.debug("Choix du jeu"+ ChoixJeu);
 		//Variable pour le choix du mode
 		int ChoixMode = 0;
 		
