@@ -5,7 +5,7 @@ import java.util.Observer;
 import java.util.Scanner;
 
 import Combinaison.Combinaison;
-
+import Config.JeuConfig;
 import Jeu.Jeu;
 
 /**
@@ -21,8 +21,8 @@ public class IHM implements Observer {
 	/**
 	 * Constructeur par défaut
 	 */
-	public IHM() {
-		this.input = new InputControl();
+	public IHM(JeuConfig p) {
+		this.input = new InputControl(p);
 	}
 
 	/**

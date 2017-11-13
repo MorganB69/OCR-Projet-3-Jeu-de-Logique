@@ -1,7 +1,11 @@
 package Jeu;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonM;
+import Config.JeuConfig;
 import IHM.IHM;
 import Joueur.Joueur;
 import Joueur.Ordinateur;
@@ -14,7 +18,8 @@ import Joueur.User;
  *
  */
 public class Mastermind extends Jeu {
-
+	
+	protected static final Logger logger = LogManager.getLogger(Mastermind.class);
 	/**
 	 * Nombre de pions biens placés
 	 */
@@ -33,8 +38,8 @@ public class Mastermind extends Jeu {
 	 *            IHM utilisée
 	 */
 	@SuppressWarnings("unchecked")
-	public Mastermind(Mode mode, IHM ihm) {
-		super(mode, ihm);
+	public Mastermind(Mode mode, IHM ihm, JeuConfig p) {
+		super(mode, ihm, p);
 		// TODO Auto-generated constructor stub
 
 		this.nomJeu = "MasterMind";
@@ -49,15 +54,15 @@ public class Mastermind extends Jeu {
 		case Challenger:
 			this.attaquant = new User();
 			this.defenseur = new Ordinateur();
-			this.target = new CombinaisonM();
-			this.reponse = new CombinaisonM();
+			this.target = new CombinaisonM(p);
+			this.reponse = new CombinaisonM(p);
 			break;
 
 		case Defenseur:
 			this.defenseur = new User();
 			this.attaquant = new Ordinateur();
-			this.target = new CombinaisonM();
-			this.reponse = new CombinaisonM();
+			this.target = new CombinaisonM(p);
+			this.reponse = new CombinaisonM(p);
 			break;
 
 		case Duel:
@@ -65,10 +70,10 @@ public class Mastermind extends Jeu {
 			this.defenseur = new Ordinateur();
 			this.attaquant2 = defenseur;
 			this.defenseur2 = attaquant;
-			this.target = new CombinaisonM();
-			this.reponse = new CombinaisonM();
-			this.target2 = new CombinaisonM();
-			this.reponse2 = new CombinaisonM();
+			this.target = new CombinaisonM(p);
+			this.reponse = new CombinaisonM(p);
+			this.target2 = new CombinaisonM(p);
+			this.reponse2 = new CombinaisonM(p);
 
 			break;
 		}
@@ -82,15 +87,15 @@ public class Mastermind extends Jeu {
 	 * Joueur.Joueur)
 	 */
 	@SuppressWarnings("unchecked")
-	public void Verification(Combinaison target, Combinaison reponse, Joueur j) {
-
+	public void Verification(Combinaison target, Combinaison reponse, Joueur j, JeuConfig p) {
+		logger.trace("Méthode de vérification du Mastermind");
 		// Comparaison des deux combinaisons. Si le joueur est l'ordinateur on
 		// enregistre le résultat
 		this.verif = "";
 		this.bienPlace = 0;
 		this.malPlace = 0;
 
-		Combinaison doublon = new CombinaisonM();
+		Combinaison doublon = new CombinaisonM(p);
 		for (int i = 0; i < target.getNbCase(); i++) {
 			doublon.comb.set(i, -1);
 		}

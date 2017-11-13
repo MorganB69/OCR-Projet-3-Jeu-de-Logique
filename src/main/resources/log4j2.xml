@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="info" strict="true" name="XMLConfig">
+<Configuration status="fatal" strict="true" name="XMLConfig">
                
   <Properties>
     <Property name="filename">log4j.log</Property>
@@ -9,12 +9,17 @@
   <Appenders>
     <Appender type="Console" name="STDOUT">
       <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %level %m %n"/>
-       <Filter type="ThresholdFilter" level="info"/>
+      <Filter type="ThresholdFilter" level="info"/>
+      <ContextMapFilter onMatch="ACCEPT" onMismatch="DENY" operator="or">
+    <KeyValuePair key="Dev" value="true"/>
+   
+  </ContextMapFilter>
+      
 
     </Appender>
 
     <Appender type="File" name="File" fileName="${filename}" append="false">
-      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %level %m %n"/>
+      <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}%C %level %m %n"/>
     </Appender>
   </Appenders>
  

@@ -3,6 +3,9 @@ package Jeu;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
 import Config.JeuConfig;
 import IHM.IHM;
@@ -18,6 +21,9 @@ import Joueur.Joueur;
  *
  */
 public abstract class Jeu extends Observable {
+	
+	protected static final Logger logger = LogManager.getLogger(Jeu.class);
+	
 	/**
 	 * Nom du Jeu
 	 */
@@ -98,10 +104,11 @@ public abstract class Jeu extends Observable {
 	 * @param ihm
 	 *            implémentation de l'IHM
 	 */
-	public Jeu(Mode mode, IHM ihm) {
+	public Jeu(Mode mode, IHM ihm, JeuConfig p) {
 
 		nomJeu = "defaut";
-		this.p = new JeuConfig();
+		
+		this.p=p;
 		this.mode = mode;
 		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
 		this.dev = p.dev;
@@ -111,7 +118,7 @@ public abstract class Jeu extends Observable {
 		this.i = ihm;
 
 		this.addObserver(i);
-
+		logger.info("Instanciation d'un jeu");
 	}
 
 	/**
@@ -124,8 +131,8 @@ public abstract class Jeu extends Observable {
 	 * @param attaquant
 	 *            Le joueur qui a donné la combinaison
 	 */
-	public void Verification(Combinaison target, Combinaison reponse, Joueur attaquant) {
-
+	public void Verification(Combinaison target, Combinaison reponse, Joueur attaquant, JeuConfig p) {
+		
 	}
 
 	/**
@@ -143,7 +150,8 @@ public abstract class Jeu extends Observable {
 	 */
 	@SuppressWarnings("unchecked")
 	public void DemarrerJeu() {
-
+		logger.traceEntry("Méthode DemarrerJeu : Partie en cours");
+		logger.traceExit("Méthode DemarrerJeu : Changement de statut");
 		if (this.mode == Mode.Challenger || this.mode == Mode.Defenseur) {
 
 			// MODE CHALLENGER OU DEFENSEUR
@@ -164,7 +172,7 @@ public abstract class Jeu extends Observable {
 
 				// Cette combinaison est vérifiée
 
-				this.Verification(this.target, this.reponse, this.attaquant);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 
@@ -184,7 +192,7 @@ public abstract class Jeu extends Observable {
 
 				this.reponse.ReSet(this.attaquant, this.resultat, this.i);
 
-				this.Verification(this.target, this.reponse, this.attaquant);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 
@@ -243,7 +251,7 @@ public abstract class Jeu extends Observable {
 				// Au premier joueur de jouer.
 				this.reponse.ReSet(attaquant, this.i, this.mode, this.statut);
 
-				this.Verification(this.target, this.reponse, this.attaquant);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 
@@ -261,7 +269,7 @@ public abstract class Jeu extends Observable {
 				// Premier joueur de jouer
 				this.reponse.ReSet(this.attaquant, this.i, this.mode, this.statut);
 
-				this.Verification(this.target, this.reponse, this.attaquant);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 				if (this.reponse.getComb().equals(this.target.getComb())) {
@@ -307,7 +315,7 @@ public abstract class Jeu extends Observable {
 				// Au deuxième joueur de jouer
 				this.reponse2.ReSet(attaquant2, this.i, this.mode, this.statut);
 
-				this.Verification(this.target2, this.reponse2, this.attaquant2);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 				if (this.reponse2.getComb().equals(this.target2.getComb()))
@@ -323,7 +331,7 @@ public abstract class Jeu extends Observable {
 				// Deuxième joueur de jouer.
 				this.reponse2.ReSet(this.attaquant2, this.resultat, this.i);
 
-				this.Verification(this.target2, this.reponse2, this.attaquant2);
+				this.Verification(this.target, this.reponse, this.attaquant, this.p);
 
 				notifierObservateur();
 				if (this.reponse2.getComb().equals(this.target2.getComb())) {

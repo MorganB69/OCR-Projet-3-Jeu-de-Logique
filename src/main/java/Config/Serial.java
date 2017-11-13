@@ -14,6 +14,9 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Classe permettant l'écriture et la récupération de données dans un fichier
  * @author Morgan
@@ -24,7 +27,7 @@ import java.util.ArrayList;
  *
  */
 public class Serial {
-
+	private static final Logger logger = LogManager.getLogger(Serial.class);
 	/**
 	 * ObjetInputStream
 	 */
@@ -64,6 +67,7 @@ public class Serial {
 	 */
 	public void Ecriture(ArrayList<Parametres> par) {
 		try {
+			logger.info("Ecriture des données dans config.properties");
 			oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File(this.d, this.p))));
 
 			oos.writeObject(par);
@@ -93,7 +97,7 @@ public class Serial {
 	public ArrayList<Parametres> LectureTest() {
 		ArrayList<Parametres> list = new ArrayList<Parametres>();
 		try {
-
+			logger.info("Lecture des données dans config.properties");
 			ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(this.d, this.p))));
 
 			list = (ArrayList<Parametres>) ois.readObject();
@@ -135,7 +139,7 @@ public class Serial {
 	public ArrayList<Parametres> Lecture() {
 		ArrayList<Parametres> list = new ArrayList<Parametres>();
 		try {
-
+			logger.info("Lecture des données dans config.properties");
 			InputStream is = this.getClass().getResourceAsStream(this.p);
 
 			ois = new ObjectInputStream(is);

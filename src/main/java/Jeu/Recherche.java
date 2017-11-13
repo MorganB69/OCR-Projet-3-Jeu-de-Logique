@@ -1,7 +1,11 @@
 package Jeu;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
 import Combinaison.CombinaisonR;
+import Config.JeuConfig;
 import IHM.IHM;
 import Joueur.Joueur;
 import Joueur.Ordinateur;
@@ -14,7 +18,7 @@ import Joueur.User;
  *
  */
 public class Recherche extends Jeu {
-
+	protected static final Logger logger = LogManager.getLogger(Recherche.class);
 	/**
 	 * Constructeur de Recherche
 	 * 
@@ -24,8 +28,8 @@ public class Recherche extends Jeu {
 	 *            Interface implémentée dans le jeu
 	 */
 	@SuppressWarnings("unchecked")
-	public Recherche(Mode mode, IHM ihm) {
-		super(mode, ihm);
+	public Recherche(Mode mode, IHM ihm, JeuConfig p) {
+		super(mode, ihm, p);
 		this.nomJeu = "Recherche";
 		for (int i = 0; i < p.nbCase; i++)
 			this.resultat.add(i, "");
@@ -36,15 +40,15 @@ public class Recherche extends Jeu {
 		case Challenger:
 			this.attaquant = new User();
 			this.defenseur = new Ordinateur();
-			this.target = new CombinaisonR();
-			this.reponse = new CombinaisonR();
+			this.target = new CombinaisonR(p);
+			this.reponse = new CombinaisonR(p);
 			break;
 
 		case Defenseur:
 			this.defenseur = new User();
 			this.attaquant = new Ordinateur();
-			this.target = new CombinaisonR();
-			this.reponse = new CombinaisonR();
+			this.target = new CombinaisonR(p);
+			this.reponse = new CombinaisonR(p);
 			break;
 
 		case Duel:
@@ -52,10 +56,10 @@ public class Recherche extends Jeu {
 			this.defenseur = new Ordinateur();
 			this.attaquant2 = defenseur;
 			this.defenseur2 = attaquant;
-			this.target = new CombinaisonR();
-			this.reponse = new CombinaisonR();
-			this.target2 = new CombinaisonR();
-			this.reponse2 = new CombinaisonR();
+			this.target = new CombinaisonR(p);
+			this.reponse = new CombinaisonR(p);
+			this.target2 = new CombinaisonR(p);
+			this.reponse2 = new CombinaisonR(p);
 
 			break;
 		}
@@ -69,8 +73,9 @@ public class Recherche extends Jeu {
 	 * Joueur.Joueur)
 	 */
 	@SuppressWarnings("unchecked")
-	public void Verification(Combinaison target, Combinaison reponse, Joueur j) {
-
+	public void Verification(Combinaison target, Combinaison reponse, Joueur j, JeuConfig p) {
+		
+		logger.trace("Méthode de vérification du Mastermind");
 		// Comparaison des deux combinaisons. Si le joueur est l'ordinateur on
 		// enregistre le résultat
 		this.verif = "";

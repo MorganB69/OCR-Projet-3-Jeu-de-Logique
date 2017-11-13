@@ -17,8 +17,8 @@ public class InputControl {
 	/**
 	 * Constructeur par défaut
 	 */
-	public InputControl() {
-		this.p = new JeuConfig();
+	public InputControl(JeuConfig p) {
+		this.p = p;
 	}
 
 	/**

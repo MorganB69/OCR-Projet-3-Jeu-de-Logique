@@ -44,10 +44,10 @@ public abstract class Combinaison {
 	/**
 	 * Constructeur par défaut d'une combinaison 
 	 */
-	public Combinaison() {
+	public Combinaison(JeuConfig p) {
 		
 		
-		this.p= new JeuConfig();
+		
 		this.comb = new ArrayList<Integer>();
 		this.chiffre=p.chiffre;
 		

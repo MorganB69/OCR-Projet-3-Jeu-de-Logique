@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Combinaison.ReSet.ReSetOrdi;
 import Combinaison.ReSet.ReSetUser;
+import Config.JeuConfig;
 import IHM.IHM;
 import Jeu.Mode;
 import Jeu.Statut;
@@ -28,8 +29,8 @@ public class CombinaisonR extends Combinaison {
 	 * Constructeur pour la combinaison Recherche
 	 * Instanciation de ReSetUser et ReSetOrdi
 	 */
-	public CombinaisonR() {
-		super();
+	public CombinaisonR(JeuConfig p) {
+		super(p);
 		this.reset = new ReSetUser();
 		this.reset2 = new ReSetOrdi();
 

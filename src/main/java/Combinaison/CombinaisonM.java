@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Combinaison.ReSet.ReSetOrdiM;
 import Combinaison.ReSet.ReSetUser;
+import Config.JeuConfig;
 import IHM.IHM;
 import Jeu.Mode;
 import Jeu.Statut;
@@ -30,8 +31,8 @@ public class CombinaisonM extends Combinaison {
 	 * Constructeur pour la combinaison Mastermind
 	 * Instanciation de ReSetUser et ReSetOrdi
 	 */
-	public CombinaisonM() {
-		super();
+	public CombinaisonM(JeuConfig p) {
+		super(p);
 
 		this.reset = new ReSetUser();
 		this.reset2 = new ReSetOrdiM(this.chiffre, this.nbCase);
