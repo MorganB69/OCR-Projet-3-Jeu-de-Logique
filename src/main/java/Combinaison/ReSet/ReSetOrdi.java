@@ -2,7 +2,11 @@ package Combinaison.ReSet;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
+import IAMaster.IAMaster;
 import IHM.IHM;
 import Jeu.Mode;
 import Jeu.Statut;
@@ -13,7 +17,7 @@ import Jeu.Statut;
  *
  */
 public class ReSetOrdi implements ReSet {
-	
+	private static final Logger logger = LogManager.getLogger(IAMaster.class);
 	/* (non-Javadoc)
 	 * Par défaut génère une combinaison aléatoire
 	 * @see Combinaison.ReSet.ReSet#SetComb(Combinaison.Combinaison, IHM.IHM, Jeu.Mode, Jeu.Statut)
@@ -41,7 +45,8 @@ public class ReSetOrdi implements ReSet {
 		
 		for (int i = 0; i < c.getNbCase(); i++) {
 			
-			
+			logger.debug("IA : Max position "+i+" : "+c.max[i]);
+			logger.debug("IA : Min position "+i+" : "+c.min[i]);
 			if (j.get(i)=="=") {
 				c.getComb().set(i,c.getComb().get(i));
 			}

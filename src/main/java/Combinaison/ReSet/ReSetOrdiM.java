@@ -2,6 +2,9 @@ package Combinaison.ReSet;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
 import IAMaster.IAMaster;
 import IHM.IHM;
@@ -16,7 +19,7 @@ import Jeu.Statut;
  *
  */
 public class ReSetOrdiM implements ReSet {
-
+	private static final Logger logger = LogManager.getLogger(ReSetOrdiM.class);
 	/**
 	 * L'IA du Mastermind qui sera utilisée
 	 */
@@ -65,35 +68,19 @@ public class ReSetOrdiM implements ReSet {
 
 			//Vérifie si une couleur existe
 			this.IA.VerifCouleur(l.get(0), l.get(1));
-			System.out.println("Verif couleur");
-			for (int j = 0; j < this.IA.position.size(); j++) {
-				System.out.println(this.IA.position.get(j));
-			}
-			System.out.println();
+
 
 			//Vérifie si une couleur déjà existante est confirmée à la bonne place
 			this.IA.VerifConfirme(l.get(0), l.get(1));
-			System.out.println("Verif Confirme");
-			for (int j = 0; j < this.IA.position.size(); j++) {
-				System.out.println(this.IA.position.get(j));
-			}
-			System.out.println();
+
 
 			//Vérifie si une couleur utilisée existe
 			this.IA.VerifExiste(l.get(0), l.get(1));
-			System.out.println("Verif existe");
-			for (int j = 0; j < this.IA.position.size(); j++) {
-				System.out.println(this.IA.position.get(j));
-			}
-			System.out.println();
+
 
 			//Vérifie si un existant est mal placé
 			this.IA.VerifMalp(l.get(0), l.get(1));
-			System.out.println("VerifMalp");
-			for (int j = 0; j < this.IA.position.size(); j++) {
-				System.out.println(this.IA.position.get(j));
-			}
-			System.out.println();
+
 		}
 
 		else {
@@ -107,27 +94,18 @@ public class ReSetOrdiM implements ReSet {
 
 		//Supprime les couleurs sur les positions non possibles
 		this.IA.Suppr();
-		System.out.println("Suppr");
-		for (int j = 0; j < this.IA.position.size(); j++) {
-			System.out.println(this.IA.position.get(j));
-		}
-		System.out.println();
+
+
 		//Remet à zero les hypothèses de l'IA du Mastermind pour le prochain tour
 		this.IA.HypReset();
-		System.out.println("Reset");
-		for (int j = 0; j < this.IA.position.size(); j++) {
-			System.out.println(this.IA.position.get(j));
-		}
-		System.out.println();
 
-		for (int j = 0; j < this.IA.existe.size(); j++) {
-			System.out.println(this.IA.existe.get(j));
-		}
+
 		//L'IA recherche la meilleure combinaison possible après les traitements précédents
 		this.IA.Combi();
-
+		logger.debug("Positions possibles : ");
 		for (int j = 0; j < this.IA.position.size(); j++) {
-			System.out.println(this.IA.position.get(j));
+			
+			logger.debug(this.IA.position.get(j));
 		}
 		//Modifie la combinaison à utiliser dans le jeu
 		c.setComb(this.IA.combRecherche);

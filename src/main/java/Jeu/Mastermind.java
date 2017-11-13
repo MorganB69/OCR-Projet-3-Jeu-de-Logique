@@ -124,7 +124,7 @@ public class Mastermind extends Jeu {
 			this.resultat.set(0, this.bienPlace);
 			this.resultat.set(1, this.malPlace);
 		}
-		System.out.println(this.resultat);
+		
 
 	}
 

@@ -36,7 +36,7 @@ public class JeuConfig {
 		Serial s = new Serial("src/main/resources", "/config.properties");
 
 		ArrayList<Parametres> list = new ArrayList<Parametres>();
-		list.add(new Parametres(12, 5, 5, true));
+		list.add(new Parametres(12, 5, 5, false));
 		s.Ecriture(list);
 
 		ArrayList<Parametres> listrecup = new ArrayList<Parametres>();

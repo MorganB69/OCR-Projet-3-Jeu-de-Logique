@@ -4,6 +4,9 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import Combinaison.Combinaison;
 import Config.JeuConfig;
 import Jeu.Jeu;
@@ -15,7 +18,7 @@ import Jeu.Jeu;
  *
  */
 public class IHM implements Observer {
-
+	private static final Logger logger = LogManager.getLogger(IHM.class);
 	InputControl input;
 
 	/**
@@ -23,6 +26,7 @@ public class IHM implements Observer {
 	 */
 	public IHM(JeuConfig p) {
 		this.input = new InputControl(p);
+		logger.trace("Instanciation IHM");
 	}
 
 	/**
@@ -53,7 +57,11 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
-		while (input.VerifJeu(essai) != true) {
+		while(essai.isEmpty()) {
+			System.out.println("Vous n'avez rien saisi, veuillez réessayer");
+			essai = sc.nextLine();
+		}
+		while (essai!=null && input.VerifJeu(essai) != true) {
 			System.out.println("Erreur dans le choix, veuillez réessayer");
 			essai = sc.nextLine();
 			input.VerifJeu(essai);
@@ -79,7 +87,11 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
-		while (input.VerifMode(essai) != true) {
+		while(essai.isEmpty()) {
+			System.out.println("Vous n'avez rien saisi, veuillez réessayer");
+			essai = sc.nextLine();
+		}
+		while (essai!=null && input.VerifMode(essai) != true) {
 			System.out.println("Erreur dans le choix, veuillez réessayer");
 			essai = sc.nextLine();
 			input.VerifMode(essai);
@@ -105,7 +117,11 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
-		while (input.VerifMode(essai) != true) {
+		while(essai.isEmpty()) {
+			System.out.println("Vous n'avez rien saisi, veuillez réessayer");
+			essai = sc.nextLine();
+		}
+		while (essai!=null && input.VerifMode(essai) != true) {
 			System.out.println("Erreur dans le choix, veuillez réessayer");
 			essai = sc.nextLine();
 			input.VerifMode(essai);
@@ -149,7 +165,11 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
-		while (input.VerifCombR(essai) != true) {
+		while(essai.isEmpty()) {
+			System.out.println("Vous n'avez rien saisi, veuillez réessayer");
+			essai = sc.nextLine();
+		}
+		while (essai!=null && input.VerifCombR(essai) != true) {
 			System.out.println("Erreur dans la combinaison, veuillez réessayer");
 			essai = sc.nextLine();
 			input.VerifCombR(essai);
@@ -173,7 +193,11 @@ public class IHM implements Observer {
 		Scanner sc = new Scanner(System.in);
 		String essai = new String();
 		essai = sc.nextLine();
-		while (input.VerifCombM(essai) != true) {
+		while(essai.isEmpty()) {
+			System.out.println("Vous n'avez rien saisi, veuillez réessayer");
+			essai = sc.nextLine();
+		}
+		while (essai!=null && input.VerifCombM(essai) != true) {
 			System.out.println("Erreur dans la combinaison, veuillez réessayer");
 			essai = sc.nextLine();
 			input.VerifCombM(essai);

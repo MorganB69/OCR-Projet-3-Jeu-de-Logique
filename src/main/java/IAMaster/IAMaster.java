@@ -3,6 +3,9 @@ package IAMaster;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Classe gérant l'IA du Mastermind
  * 
@@ -10,7 +13,8 @@ import java.util.Collections;
  *
  */
 public class IAMaster {
-
+	
+	private static final Logger logger = LogManager.getLogger(IAMaster.class);
 	/**
 	 * ArrayList des différentes couleurs/chiffres possibles
 	 */
@@ -175,7 +179,7 @@ public class IAMaster {
 				position.get(i).set(hyp, -1);
 			}
 			del.add(hyp);
-			System.out.println("Couleur existe pas");
+			logger.debug("IA : Couleur existe pas");
 		}
 
 		else
@@ -189,18 +193,18 @@ public class IAMaster {
 						index = combRecherche.indexOf(existe.get(i));
 					} else
 						index = combRecherche.lastIndexOf(existe.get(i));
-					System.out.println("index " + index);
+					
 					if (index != -1) {
 
 						position.get(index).set(existe.get(i), -1);
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					logger.error("pas de couleur");
 				}
 
 			}
 			emp++;
-			System.out.println("Existe mal placé");
+			logger.debug("IA : Existe mal placé");
 		}
 	}
 
@@ -227,16 +231,13 @@ public class IAMaster {
 				// TODO: handle exception
 			}
 
-			System.out.println("index " + index);
+			
 			if (index != -1) {
 				for (int i1 = 0; i1 < position.size(); i1++) {
 					if (i1 == index) {
-						System.out.println("i1=index est true");
+						
 						for (int k = 0; k < position.get(i1).size(); k++) {
-							System.out.println("k :" + k);
-							System.out.println("position2 i1 k : " + position.get(i1).get(k));
-							System.out.println("existe : " + existe.get(0));
-							System.out.println("position2 get : " + position.get(i1));
+
 							if (position.get(i1).get(k) != (existe.get(0)))
 								position.get(i1).set(k, -1);
 
@@ -261,7 +262,7 @@ public class IAMaster {
 					}
 				}
 
-				System.out.println("confirmé : " + existe.get(0) + " a la position : " + index);
+				logger.debug("IA : confirmé  " + existe.get(0) + " a la position : " + index);
 				combConfirm.set(index, existe.get(0));
 				confirme.add(existe.get(0));
 				existe.remove(0);
@@ -286,7 +287,7 @@ public class IAMaster {
 			if (existe.size() + confirme.size() - confp < nbcase)
 				for (int i = 0; i <= (b + m) - nbc - doublep; i++)
 					existe.add(hyp);
-			System.out.println("Couleur Existe :" + hyp);
+			logger.debug("IA : Couleur Existe " + hyp);
 			del.add(hyp);
 		}
 		// Si n'existe pas on supprime les possibilités
@@ -294,7 +295,7 @@ public class IAMaster {
 			for (int i = 0; i < position.size(); i++) {
 				position.get(i).set(hyp, -1);
 				del.add(hyp);
-				System.out.println("Couleur Existe pas : " + hyp);
+				logger.debug("IA Couleur Existe pas  " + hyp);
 				if (b >= existe.size() + confirme.size() && existe.size() > 0) {
 					for (int i1 = 0; i1 < existe.size(); i1++) {
 						int index = combRecherche.indexOf(existe.get(i1));
@@ -310,7 +311,7 @@ public class IAMaster {
 									}
 
 								}
-								System.out.println("confirmé si autre couleur existe pas : " + existe.get(i11)
+								logger.debug("IA : confirmé si autre couleur existe pas  " + existe.get(i11)
 										+ " position : " + index);
 								combConfirm.set(index, existe.get(i11));
 								confirme.add(existe.get(i11));
@@ -339,7 +340,7 @@ public class IAMaster {
 			for (int i = 0; i < position.size(); i++) {
 				if (combRecherche.get(i) != combConfirm.get(i))
 					position.get(i).set(combRecherche.get(i), -1);
-				System.out.println("Mal placé supprimé à chaque position");
+				logger.debug("IA : Mal placé supprimé à chaque position");
 
 			}
 		}
@@ -371,8 +372,8 @@ public class IAMaster {
 								countremove++;
 							}
 						}
-						System.out.println(
-								"Confirmé par élinimation : " + (int) position.get(i).get(j) + " position : " + i);
+						logger.debug(
+								" IA : Confirmé par élimination : " + (int) position.get(i).get(j) + " position : " + i);
 					}
 				}
 			}
@@ -405,8 +406,8 @@ public class IAMaster {
 								countremove++;
 							}
 						}
-						System.out.println(
-								"Confirmé par élinimation 2 : " + (int) position.get(j).get(i) + " position : " + j);
+						logger.debug(
+								"IA : Confirmé par élimination 2 : " + (int) position.get(j).get(i) + " position : " + j);
 					}
 				}
 			}
@@ -516,9 +517,9 @@ public class IAMaster {
 					} else
 						index = combRecherche.lastIndexOf(combFinal.get(0));
 				} catch (Exception e) {
-					// TODO: handle exception
+					logger.error(e);
 				}
-				System.out.println("index " + index);
+				
 
 				if (index != -1) {
 					for (int i1 = 0; i1 < position.size(); i1++) {
@@ -550,7 +551,7 @@ public class IAMaster {
 						}
 					}
 
-					 System.out.println("confirmé final : "+combFinal.get(0) + " a la position : "+index +"double : "+existedouble);
+					 logger.debug("IA : confirmé final : "+combFinal.get(0) + " a la position : "+index +"double : "+existedouble);
 				}
 				combConfirm.set(index, combFinal.get(0));
 				confirme.add(combFinal.get(0));
@@ -580,7 +581,7 @@ public class IAMaster {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-				System.out.println("confirmé final par élmimination");
+				logger.debug("IA : confirmé final par élimination");
 				combConfirm.set(index, hyp);
 				confirme.add(hyp);
 				int countremove = 0;
@@ -598,7 +599,7 @@ public class IAMaster {
 
 			else
 				position.get(combRecherche.indexOf(combFinal.get(0))).set(combFinal.get(0), -1);
-				System.out.println("élimination ");
+				logger.debug("IA : élimination ");
 		}
 
 	}
@@ -635,7 +636,7 @@ public class IAMaster {
 						}
 						if (count == 0) {
 							position.get(i).set(j, -1);
-							System.out.println("suppr hyp non ds comb finale"+i+j);
+							logger.debug("IA suppr hyp non ds comb finale"+i+j);
 							count=0;
 						}
 						
@@ -644,7 +645,7 @@ public class IAMaster {
 			}
 		}
 		
-		System.out.println("couleurs hyp : " + couleur);
+		logger.debug("IA couleurs hyp : " + couleur);
 		emp = 0;
 		nbc = 0;
 		existep = 0;
@@ -682,7 +683,7 @@ public class IAMaster {
 
 			if (combConfirm.get(i) != -1) {
 				combRecherche.set(i, combConfirm.get(i));
-				System.out.println("placer dans comb un confirmé + position : " + i);
+				logger.debug("IA placer dans comb un confirmé + position : " + i);
 				confp++;
 			} else if (existe.size() > k) {
 				if (existe.size() + confirme.size() == nbcase) {
@@ -692,7 +693,7 @@ public class IAMaster {
 							if (existe.get(j) != combFinal.get(0)) {
 								hyp = existe.get(j);
 								combRecherche.set(i, hyp);
-								System.out.println("placer hyp finale");
+								logger.debug("IA placer hyp finale");
 								existep++;
 								break;
 							}
@@ -702,7 +703,7 @@ public class IAMaster {
 						for (int j = 0; j < position.get(i).size(); j++) {
 							if ((int) position.get(i).get(j) != -1) {
 								combRecherche.set(i, (int) position.get(i).get(j));
-								System.out.println("placer existant si possible final");
+								logger.debug("IA placer existant si possible final");
 								combFinal.add((int) position.get(i).get(j));
 								existep++;
 								k++;
@@ -751,7 +752,7 @@ public class IAMaster {
 							combRecherche.set(i, existe.get(0));
 
 							k++;
-							System.out.println("Placer dans comb un existant + position : " + i);
+							logger.debug("IA Placer dans comb un existant + position : " + i);
 							existep++;
 							for (int i1 = 0; i1 < confirme.size(); i1++) {
 								if (existe.get(0) == confirme.get(i1))
@@ -761,26 +762,26 @@ public class IAMaster {
 
 						} else
 							combRecherche.set(i, hyp);
-						System.out.println(" Placer hyp par défaut + position : " + i);
+						logger.debug("IA Placer hyp par défaut + position : " + i);
 					}
 				}
 			} else {
 				combRecherche.set(i, hyp);
-				System.out.println("Placer hyp par défaut + position : " + i);
+				logger.debug("IA Placer hyp par défaut + position : " + i);
 			}
 			//
 			//
 
 		}
-		System.out.println("Existe : ");
+		logger.debug("IA : Existe : ");
 		for (int j = 0; j < existe.size(); j++) {
-			System.out.print(existe.get(j));
-			System.out.println();
+			logger.debug(existe.get(j));
+			
 		}
-		System.out.println("Confirmé : ");
+		logger.debug("IA Confirmé : ");
 		for (int j = 0; j < confirme.size(); j++) {
-			System.out.print(confirme.get(j));
-			System.out.println();
+			logger.debug(confirme.get(j));
+			
 		}
 
 	}

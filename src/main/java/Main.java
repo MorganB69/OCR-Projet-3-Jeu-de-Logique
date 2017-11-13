@@ -104,21 +104,25 @@ public class Main {
 				if (args[0].equals("d")) {
 					jeu.dev = true;
 					ThreadContext.put("Dev", jeu.dev.toString());
-					System.out.println("mode dév activé");
+					logger.info("mode développeur activé");
 					
 				} else
 					System.out.println(args[0]);
 			} catch (Exception e) {
 				if (jeu.dev == true) {
-					System.out.println("mode dév activé");
-					ThreadContext.put("Dev", jeu.dev.toString());}
+					
+					ThreadContext.put("Dev", jeu.dev.toString());
+					logger.info("mode développeur activé");
+					}
+				
 				else {
-					System.out.println("mode normal");
+					
 					ThreadContext.put("Dev", jeu.dev.toString());
 				}
 			}
 			
 			logger.info("Mise en place de log4J en phase de test");
+			
 			
 			//Fin de la partie, choix de l'utilisateur
 			while (jeu.statut != Statut.Fin) {
