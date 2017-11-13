@@ -315,7 +315,7 @@ public abstract class Jeu extends Observable {
 				// Au deuxième joueur de jouer
 				this.reponse2.ReSet(attaquant2, this.i, this.mode, this.statut);
 
-				this.Verification(this.target, this.reponse, this.attaquant, this.p);
+				this.Verification(this.target2, this.reponse2, this.attaquant2, this.p);
 
 				notifierObservateur();
 				if (this.reponse2.getComb().equals(this.target2.getComb()))
@@ -331,7 +331,7 @@ public abstract class Jeu extends Observable {
 				// Deuxième joueur de jouer.
 				this.reponse2.ReSet(this.attaquant2, this.resultat, this.i);
 
-				this.Verification(this.target, this.reponse, this.attaquant, this.p);
+				this.Verification(this.target2, this.reponse2, this.attaquant2, this.p);
 
 				notifierObservateur();
 				if (this.reponse2.getComb().equals(this.target2.getComb())) {

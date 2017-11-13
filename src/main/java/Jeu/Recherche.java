@@ -97,7 +97,7 @@ public class Recherche extends Jeu {
 				}
 			}
 		}
-		System.out.println();
+		System.out.println("Resultat : "+ this.resultat);
 
 	}
 
