@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +36,9 @@ public class Serial {
 	 * ObjetInputStream
 	 */
 	ObjectInputStream ois;
+	/**
+	 * InputStreamReader
+	 */
 	InputStreamReader reader;
 	/**
 	 * ObjectOutStream
@@ -136,6 +139,11 @@ public class Serial {
 		return list;
 	}*/
 	
+	/**
+	 * Méthode pour récupérer les paramètres de l'application
+	 * @return
+	 * 	Une liste d'int correspondant à chaque paramètre
+	 */
 	public ArrayList<Integer> LectureTest() {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		try {

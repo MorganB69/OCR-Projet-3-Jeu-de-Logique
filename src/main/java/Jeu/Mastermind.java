@@ -43,7 +43,7 @@ public class Mastermind extends Jeu {
 		// TODO Auto-generated constructor stub
 
 		this.nomJeu = "MasterMind";
-		for (int i = 0; i < p.nbCase; i++)
+		for (int i = 0; i < p.getNbCase(); i++)
 			this.resultat.add(i, "");
 		this.bienPlace = 0;
 		this.malPlace = 0;
@@ -97,21 +97,21 @@ public class Mastermind extends Jeu {
 
 		Combinaison doublon = new CombinaisonM(p);
 		for (int i = 0; i < target.getNbCase(); i++) {
-			doublon.comb.set(i, -1);
+			doublon.getComb().set(i, -1);
 		}
 
 		for (int i = 0; i < target.getNbCase(); i++) {
 
 			if (reponse.getComb().get(i) == target.getComb().get(i)) {
 				this.bienPlace++;
-				doublon.comb.set(i, reponse.getComb().get(i));
+				doublon.getComb().set(i, reponse.getComb().get(i));
 
 			} else {
 				for (int k = 0; k < target.getNbCase(); k++) {
 					if (reponse.getComb().get(k) == target.getComb().get(i)
 							&& reponse.getComb().get(k) != doublon.getComb().get(k)) {
 						this.malPlace++;
-						doublon.comb.set(k, reponse.getComb().get(k));
+						doublon.getComb().set(k, reponse.getComb().get(k));
 						break;
 
 					}

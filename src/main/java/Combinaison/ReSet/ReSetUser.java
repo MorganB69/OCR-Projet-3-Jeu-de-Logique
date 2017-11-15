@@ -1,9 +1,9 @@
 package Combinaison.ReSet;
 
-import java.util.Scanner;
+
 
 import Combinaison.Combinaison;
-import Combinaison.CombinaisonM;
+
 import IHM.IHM;
 import Jeu.Mode;
 import Jeu.Statut;

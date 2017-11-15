@@ -223,18 +223,18 @@ public class IHM implements Observer {
 			Jeu r = (Jeu) o;
 			System.out.println();
 
-			switch (r.statut) {
+			switch (r.getStatut()) {
 			case Start:
 				System.out.println("Bonjour, la partie commence");
-				System.out.println("Le jeu est : " + r.nomJeu);
-				System.out.println("Le mode est : " + r.mode.name());
-				System.out.println("Vous avez " + r.essai + " essais");
-				System.out.println("La combinaison est composée de " + r.target.getNbCase() + " chiffres.");
-				if (r.dev == true) {
-					System.out.println("La cible est : " + r.target);
+				System.out.println("Le jeu est : " + r.getNomJeu());
+				System.out.println("Le mode est : " + r.getMode().name());
+				System.out.println("Vous avez " + r.getEssai() + " essais");
+				System.out.println("La combinaison est composée de " + r.getTarget().getNbCase() + " chiffres.");
+				if (r.getDev() == true) {
+					System.out.println("La cible est : " + r.getTarget());
 
-					if (r.target2 != null)
-						System.out.println("La deuxième cible est " + r.target2);
+					if (r.getTarget2() != null)
+						System.out.println("La deuxième cible est " + r.getTarget2());
 				} else
 					System.out.print("");
 				System.out.println();
@@ -242,19 +242,19 @@ public class IHM implements Observer {
 
 			case Tour1:
 
-				System.out.println("Votre réponse est : " + r.reponse);
-				System.out.println("Vérification : " + r.verif);
+				System.out.println("Votre réponse est : " + r.getReponse());
+				System.out.println("Vérification : " + r.getVerif());
 				break;
 
 			case EnCours:
 
-				System.out.println("Votre réponse est : " + r.reponse);
-				System.out.println("Vérification : " + r.verif);
+				System.out.println("Votre réponse est : " + r.getReponse());
+				System.out.println("Vérification : " + r.getVerif());
 				break;
 
 			case FinTour:
 				System.out.println("Fin du tour");
-				System.out.println("Il vous reste " + r.essai + " essais.");
+				System.out.println("Il vous reste " + r.getEssai() + " essais.");
 				System.out.println();
 				break;
 
@@ -268,9 +268,9 @@ public class IHM implements Observer {
 
 			default:
 
-				System.out.println(r.attaquant2.getNom() + " à vous de jouer");
-				System.out.println("Votre réponse est : " + r.reponse2);
-				System.out.println("Vérification : " + r.verif);
+				System.out.println(r.getAttaquant2().getNom() + " à vous de jouer");
+				System.out.println("Votre réponse est : " + r.getReponse2());
+				System.out.println("Vérification : " + r.getVerif());
 
 				break;
 			}
@@ -280,41 +280,4 @@ public class IHM implements Observer {
 
 }
 
-/*
- * switch (jeu.statut) { case 0: System.out.println("La partie commence");
- * System.out.println("Le défenseur choisit la combinaison secrète");
- * System.out.println();
- * 
- * 
- * break;
- * 
- * case 1: System.out.println(); System.out.println("Premier Tour");
- * System.out.println("La cible est "+jeu.target);
- * System.out.println("nombre d'essai restants :" + jeu.essai);
- * 
- * 
- * break;
- * 
- * case 2 : System.out.println(); System.out.println("La partie continue");
- * System.out.println("nombre d'essai restants :" + jeu.essai);
- * 
- * break;
- * 
- * case 3: System.out.println("Fin du tour");
- * 
- * 
- * break;
- * 
- * case 4: System.out.println(); System.out.println("La partie est perdue...");
- * 
- * break;
- * 
- * case 5 : System.out.println(); System.out.println("La partie est gagnée!");
- * 
- * break;
- * 
- * case 6: System.out.println(); System.out.println("Fin de la partie"); break;
- * 
- * 
- * default: break; }
- */
+

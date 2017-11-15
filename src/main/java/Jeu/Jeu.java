@@ -27,74 +27,74 @@ public abstract class Jeu extends Observable {
 	/**
 	 * Nom du Jeu
 	 */
-	public String nomJeu;
+	protected String nomJeu;
 	/**
 	 * Classe des paramètres du jeu
 	 */
-	JeuConfig p;
+	protected JeuConfig p;
 	/**
 	 * Nombre d'essai
 	 */
-	public int essai;
+	protected int essai;
 	/**
 	 * Mode développeur
 	 */
-	public Boolean dev;
+	protected Boolean dev;
 	/**
 	 * Combinaison à trouver pour le joueur 1
 	 */
-	public Combinaison target;
+	protected Combinaison target;
 	/**
 	 * Combinaison à trouver pour le joueur 2 (Mode duel)
 	 */
-	public Combinaison target2;
+	protected Combinaison target2;
 	/**
 	 * Combinaison donnée par le joueur 1
 	 */
-	public Combinaison reponse;
+	protected Combinaison reponse;
 	/**
 	 * Combinaison donnée par le joueur 2 (Mode duel)
 	 */
-	public Combinaison reponse2;
+	protected Combinaison reponse2;
 	/**
 	 * Joueur attaquant 1
 	 */
-	public Joueur attaquant;
+	protected Joueur attaquant;
 	/**
 	 * Joueur attaquant 2 (Mode duel)
 	 */
-	public Joueur attaquant2;
+	protected Joueur attaquant2;
 	/**
 	 * Joueur défenseur 1
 	 */
-	public Joueur defenseur;
+	protected Joueur defenseur;
 	/**
 	 * Joueur défenseur 2 (Mode duel)
 	 */
-	public Joueur defenseur2;
+	protected Joueur defenseur2;
 	/**
 	 * IHM implémentée dans le jeu
 	 */
-	public IHM i;
+	protected IHM i;
 
 	/**
 	 * Définit le statut du déroulement la partie
 	 */
-	public Statut statut;
+	protected Statut statut;
 	/**
 	 * Mode de jeu
 	 */
-	public Mode mode;
+	protected Mode mode;
 	/**
 	 * Résultat après vérification de la combinaison
 	 */
 	@SuppressWarnings("rawtypes")
-	public ArrayList resultat;
+	protected ArrayList resultat;
 
 	/**
 	 * Utilisée pour la vérification de la combinaison
 	 */
-	public String verif;
+	protected String verif;
 
 	/**
 	 * Constructeur du jeu
@@ -110,8 +110,8 @@ public abstract class Jeu extends Observable {
 		
 		this.p=p;
 		this.mode = mode;
-		this.essai = p.essai;// A FIXER DANS LE FICHIER DE PARAMETRE
-		this.dev = p.dev;
+		this.essai = p.getEssai();// A FIXER DANS LE FICHIER DE PARAMETRE
+		this.dev = p.getDev();
 		this.statut = Statut.Start;
 		// A CHANGER VIA UNE ENUMERATION
 		this.resultat = new ArrayList<>();
@@ -345,4 +345,142 @@ public abstract class Jeu extends Observable {
 		// }
 
 	}
+
+	public String getNomJeu() {
+		return nomJeu;
+	}
+
+	public void setNomJeu(String nomJeu) {
+		this.nomJeu = nomJeu;
+	}
+
+	public JeuConfig getP() {
+		return p;
+	}
+
+	public void setP(JeuConfig p) {
+		this.p = p;
+	}
+
+	public int getEssai() {
+		return essai;
+	}
+
+	public void setEssai(int essai) {
+		this.essai = essai;
+	}
+
+	public Boolean getDev() {
+		return dev;
+	}
+
+	public void setDev(Boolean dev) {
+		this.dev = dev;
+	}
+
+	public Combinaison getTarget() {
+		return target;
+	}
+
+	public void setTarget(Combinaison target) {
+		this.target = target;
+	}
+
+	public Combinaison getTarget2() {
+		return target2;
+	}
+
+	public void setTarget2(Combinaison target2) {
+		this.target2 = target2;
+	}
+
+	public Combinaison getReponse() {
+		return reponse;
+	}
+
+	public void setReponse(Combinaison reponse) {
+		this.reponse = reponse;
+	}
+
+	public Combinaison getReponse2() {
+		return reponse2;
+	}
+
+	public void setReponse2(Combinaison reponse2) {
+		this.reponse2 = reponse2;
+	}
+
+	public Joueur getAttaquant() {
+		return attaquant;
+	}
+
+	public void setAttaquant(Joueur attaquant) {
+		this.attaquant = attaquant;
+	}
+
+	public Joueur getAttaquant2() {
+		return attaquant2;
+	}
+
+	public void setAttaquant2(Joueur attaquant2) {
+		this.attaquant2 = attaquant2;
+	}
+
+	public Joueur getDefenseur() {
+		return defenseur;
+	}
+
+	public void setDefenseur(Joueur defenseur) {
+		this.defenseur = defenseur;
+	}
+
+	public Joueur getDefenseur2() {
+		return defenseur2;
+	}
+
+	public void setDefenseur2(Joueur defenseur2) {
+		this.defenseur2 = defenseur2;
+	}
+
+	public IHM getI() {
+		return i;
+	}
+
+	public void setI(IHM i) {
+		this.i = i;
+	}
+
+	public Statut getStatut() {
+		return statut;
+	}
+
+	public void setStatut(Statut statut) {
+		this.statut = statut;
+	}
+
+	public Mode getMode() {
+		return mode;
+	}
+
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	public ArrayList getResultat() {
+		return resultat;
+	}
+
+	public void setResultat(ArrayList resultat) {
+		this.resultat = resultat;
+	}
+
+	public String getVerif() {
+		return verif;
+	}
+
+	public void setVerif(String verif) {
+		this.verif = verif;
+	}
+	
+	
 }

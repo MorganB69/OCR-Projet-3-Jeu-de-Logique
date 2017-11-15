@@ -102,22 +102,22 @@ public class Main {
 			// VERIFICATION DU MODE DEVELOPPEUR
 			try {
 				if (args[0].equals("d")) {
-					jeu.dev = true;
-					ThreadContext.put("Dev", jeu.dev.toString());
+					jeu.setDev(true);
+					ThreadContext.put("Dev", jeu.getDev().toString());
 					logger.info("mode dev : ON");
 					
 				} else
 					System.out.println(args[0]);
 			} catch (Exception e) {
-				if (jeu.dev == true) {
+				if (jeu.getDev() == true) {
 					
-					ThreadContext.put("Dev", jeu.dev.toString());
+					ThreadContext.put("Dev", jeu.getDev().toString());
 					logger.info("mode dev : ON");
 					}
 				
 				else {
 					
-					ThreadContext.put("Dev", jeu.dev.toString());
+					ThreadContext.put("Dev", jeu.getDev().toString());
 				}
 			}
 			
@@ -125,11 +125,11 @@ public class Main {
 			
 			
 			//Fin de la partie, choix de l'utilisateur
-			while (jeu.statut != Statut.Fin) {
+			while (jeu.getStatut() != Statut.Fin) {
 				jeu.DemarrerJeu();
 			}
 
-			if (jeu.statut == Statut.Fin) {
+			if (jeu.getStatut() == Statut.Fin) {
 				int ChoixFin = i.ChoixFin();
 				switch (ChoixFin) {
 				//Continuer le même jeu et le même mode

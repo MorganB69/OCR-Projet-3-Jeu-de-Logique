@@ -45,19 +45,19 @@ public class ReSetOrdi implements ReSet {
 		
 		for (int i = 0; i < c.getNbCase(); i++) {
 			
-			logger.debug("IA : Max position "+i+" : "+c.max[i]);
-			logger.debug("IA : Min position "+i+" : "+c.min[i]);
+			logger.debug("IA : Max position "+i+" : "+c.getMax()[i]);
+			logger.debug("IA : Min position "+i+" : "+c.getMin()[i]);
 			if (j.get(i)=="=") {
 				c.getComb().set(i,c.getComb().get(i));
 			}
 			else if (j.get(i)=="-") {
-				c.max[i]=c.getComb().get(i)-1;
-				c.getComb().set(i, (int) (Math.random() * (c.max[i] - c.min[i] + 1 ) + c.min[i]));
+				c.getMax()[i]=c.getComb().get(i)-1;
+				c.getComb().set(i, (int) (Math.random() * (c.getMax()[i] - c.getMin()[i] + 1 ) + c.getMin()[i]));
 
 			}
 			else {
-				c.min[i]=c.getComb().get(i)+1;
-				c.getComb().set(i, (int) (Math.random() * (c.max[i] - c.min[i] + 1) + c.min[i]));
+				c.getMin()[i]=c.getComb().get(i)+1;
+				c.getComb().set(i, (int) (Math.random() * (c.getMax()[i] - c.getMin()[i] + 1) + c.getMin()[i]));
 
 			}
 			
@@ -74,7 +74,7 @@ public class ReSetOrdi implements ReSet {
 	public void SetCombM(Combinaison c, IHM k) {
 		
 				for (int i = 0; i < c.getNbCase(); i++) {
-					c.getComb().set(i, (int) (Math.random() * (c.chiffre - 0 + 1) + 0));
+					c.getComb().set(i, (int) (Math.random() * (c.getChiffre() - 0 + 1) + 0));
 				}
 	}
 	

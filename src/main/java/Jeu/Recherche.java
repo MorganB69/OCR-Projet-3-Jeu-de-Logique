@@ -31,7 +31,7 @@ public class Recherche extends Jeu {
 	public Recherche(Mode mode, IHM ihm, JeuConfig p) {
 		super(mode, ihm, p);
 		this.nomJeu = "Recherche";
-		for (int i = 0; i < p.nbCase; i++)
+		for (int i = 0; i < p.getNbCase(); i++)
 			this.resultat.add(i, "");
 
 		switch (mode) {

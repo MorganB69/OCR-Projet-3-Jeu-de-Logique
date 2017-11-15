@@ -72,7 +72,7 @@ public class InputControl {
 
 		}
 
-		if (s.length() != p.nbCase) {
+		if (s.length() != p.getNbCase()) {
 			System.out.println("Pas le bon nombre de case");
 			return false;
 		}
@@ -91,14 +91,14 @@ public class InputControl {
 	public Boolean VerifCombM(String s) {
 		for (int i = 0; i < s.length(); i++) {
 			int a = Character.getNumericValue(s.charAt(i));
-			if (a < 0 || a >= p.chiffre) {
-				System.out.println("Chiffres non compris entre 0 et " + (p.chiffre - 1) + " ou caractère invalide");
+			if (a < 0 || a >= p.getChiffre()) {
+				System.out.println("Chiffres non compris entre 0 et " + (p.getChiffre() - 1) + " ou caractère invalide");
 				return false;
 			}
 
 		}
 
-		if (s.length() != p.nbCase) {
+		if (s.length() != p.getNbCase()) {
 			System.out.println("Pas le bon nombre de case");
 			return false;
 		}

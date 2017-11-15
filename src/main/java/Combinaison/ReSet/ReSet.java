@@ -15,7 +15,7 @@ import Jeu.Statut;
  *
  */
 public interface ReSet {
-	//void SetComb(Combinaison c, IHM i);
+	
 	/**
 	 * Méthode permettant de changer la combinaison
 	 * @param c

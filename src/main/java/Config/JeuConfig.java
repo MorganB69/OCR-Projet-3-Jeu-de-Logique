@@ -12,19 +12,19 @@ public class JeuConfig {
 	/**
 	 * Nombre d'essai
 	 */
-	public int essai;
+	protected int essai;
 	/**
 	 * Nombre de cases
 	 */
-	public int nbCase;
+	protected int nbCase;
 	/**
 	 * Nombre de chiffres
 	 */
-	public int chiffre;
+	protected int chiffre;
 	/**
 	 * Mode développeur
 	 */
-	public Boolean dev;
+	protected Boolean dev;
 
 	/**
 	 * Constructeur par défaut allant récupérer les paramètres dans
@@ -57,6 +57,38 @@ public class JeuConfig {
 		this.nbCase = listrecup.get(0).nbCase;
 		this.chiffre = listrecup.get(0).chiffre;
 		this.dev = listrecup.get(0).dev;*/
+	}
+
+	public int getEssai() {
+		return essai;
+	}
+
+	public void setEssai(int essai) {
+		this.essai = essai;
+	}
+
+	public int getNbCase() {
+		return nbCase;
+	}
+
+	public void setNbCase(int nbCase) {
+		this.nbCase = nbCase;
+	}
+
+	public int getChiffre() {
+		return chiffre;
+	}
+
+	public void setChiffre(int chiffre) {
+		this.chiffre = chiffre;
+	}
+
+	public Boolean getDev() {
+		return dev;
+	}
+
+	public void setDev(Boolean dev) {
+		this.dev = dev;
 	}
 
 }

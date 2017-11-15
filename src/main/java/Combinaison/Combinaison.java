@@ -18,7 +18,7 @@ public abstract class Combinaison {
 	/**
 	 * ArrayList de la combinaison
 	 */
-	public ArrayList<Integer> comb;
+	protected ArrayList<Integer> comb;
 	/**
 	 * Attribut qui permet de récupérer les paramètres de la combinaison
 	 */
@@ -26,19 +26,19 @@ public abstract class Combinaison {
 	/**
 	 * Nombre de case de la combinaison 
 	 */
-	int nbCase;
+	protected int nbCase;
 	/**
 	 * Permet d'enregistrer la valeur maximale pour l'IA Recherche
 	 */
-	public int[]max;
+	protected  int[]max;
 	/**
 	 * Permet d'enregistrer la valeur minimale pour l'IA Recherche
 	 */
-	public int[]min;
+	protected  int[]min;
 	/**
 	 * Nombre de chiffre/couleur pour le MasterMind 
 	 */
-	public int chiffre;
+	protected int chiffre;
 	
 
 	/**
@@ -49,9 +49,9 @@ public abstract class Combinaison {
 		
 		
 		this.comb = new ArrayList<Integer>();
-		this.chiffre=p.chiffre;
+		this.chiffre=p.getChiffre();
 		
-		this.nbCase = p.nbCase;
+		this.nbCase = p.getNbCase();
 
 		// En fonction du nombre de cases définies dans le fichier on crée une
 		// combinaison aléatoire par défaut
@@ -147,5 +147,47 @@ public abstract class Combinaison {
 	public void setNbCase(int nbCase) {
 		this.nbCase = nbCase;
 	}
+
+
+	public JeuConfig getP() {
+		return p;
+	}
+
+
+	public void setP(JeuConfig p) {
+		this.p = p;
+	}
+
+
+	public int[] getMax() {
+		return max;
+	}
+
+
+	public void setMax(int[] max) {
+		this.max = max;
+	}
+
+
+	public int[] getMin() {
+		return min;
+	}
+
+
+	public void setMin(int[] min) {
+		this.min = min;
+	}
+
+
+	public int getChiffre() {
+		return chiffre;
+	}
+
+
+	public void setChiffre(int chiffre) {
+		this.chiffre = chiffre;
+	}
+	
+	
 
 }

@@ -18,71 +18,71 @@ public class IAMaster {
 	/**
 	 * ArrayList des différentes couleurs/chiffres possibles
 	 */
-	public ArrayList<Integer> couleur;
+	protected ArrayList<Integer> couleur;
 
 	/**
 	 * ArrayList comprenant les couleurs/chiffres existants mais non confirmés
 	 */
-	public ArrayList<Integer> existe;
+	protected ArrayList<Integer> existe;
 	/**
 	 * ArrayList permettant de chercher la combinaison quand toutes les
 	 * couleurs/chiffres sont découverts
 	 */
-	public ArrayList<Integer> combFinal;
+	protected ArrayList<Integer> combFinal;
 	/**
 	 * ArrayList comprenant les couleurs/chiffres confirmés
 	 */
-	public ArrayList<Integer> confirme;
+	protected ArrayList<Integer> confirme;
 	/**
 	 * Double ArrayList comprenant les chiffres possibles à chaque case
 	 */
 	@SuppressWarnings("rawtypes")
-	public ArrayList<ArrayList> position;
+	protected ArrayList<ArrayList> position;
 	/**
 	 * Utilisé pour supprimer des éléments dans chaque ArrayList
 	 */
-	public ArrayList<Integer> del;
+	protected ArrayList<Integer> del;
 	/**
 	 * Couleur/chiffre testé par l'ordinateur
 	 */
-	public int hyp;
+	protected int hyp;
 	/**
 	 * Combinaison utilisée par l'IA
 	 */
-	public ArrayList<Integer> combRecherche;
+	protected ArrayList<Integer> combRecherche;
 	/**
 	 * Combinaison comprenant les valeurs déjà confirmées
 	 */
-	public ArrayList<Integer> combConfirm;
+	protected ArrayList<Integer> combConfirm;
 	/**
 	 * Nombre de chiffre dans la combinaison
 	 */
-	public int chiffre;
+	protected int chiffre;
 	/**
 	 * Nombre de case
 	 */
-	public int nbcase;
+	protected int nbcase;
 	/**
 	 * Nombre de couleurs/chiffres différents dans la combinaison testée
 	 */
-	int nbc = 0;
+	protected int nbc = 0;
 	/**
 	 * Nombre de couleurs/chiffres existants placés dans la combinaison testée
 	 */
-	public int existep = 0;
+	protected int existep = 0;
 	/**
 	 * Nombre d'existants mal placés
 	 */
-	int emp = 0;
+	protected int emp = 0;
 	/**
 	 * Nombre de couleurs/chiffres confirmés placés dans la combinaison testée
 	 */
-	public int confp = 0;
+	protected int confp = 0;
 
 	/**
 	 * Nombre de doublons placés dans la combinaison testée
 	 */
-	public int doublep = 0;
+	protected int doublep = 0;
 
 	/**
 	 * Constructeur par défaut
@@ -785,4 +785,133 @@ public class IAMaster {
 		}
 
 	}
+
+	public ArrayList<Integer> getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(ArrayList<Integer> couleur) {
+		this.couleur = couleur;
+	}
+
+	public ArrayList<Integer> getExiste() {
+		return existe;
+	}
+
+	public void setExiste(ArrayList<Integer> existe) {
+		this.existe = existe;
+	}
+
+	public ArrayList<Integer> getCombFinal() {
+		return combFinal;
+	}
+
+	public void setCombFinal(ArrayList<Integer> combFinal) {
+		this.combFinal = combFinal;
+	}
+
+	public ArrayList<Integer> getConfirme() {
+		return confirme;
+	}
+
+	public void setConfirme(ArrayList<Integer> confirme) {
+		this.confirme = confirme;
+	}
+
+	public ArrayList<ArrayList> getPosition() {
+		return position;
+	}
+
+	public void setPosition(ArrayList<ArrayList> position) {
+		this.position = position;
+	}
+
+	public ArrayList<Integer> getDel() {
+		return del;
+	}
+
+	public void setDel(ArrayList<Integer> del) {
+		this.del = del;
+	}
+
+	public int getHyp() {
+		return hyp;
+	}
+
+	public void setHyp(int hyp) {
+		this.hyp = hyp;
+	}
+
+	public ArrayList<Integer> getCombRecherche() {
+		return combRecherche;
+	}
+
+	public void setCombRecherche(ArrayList<Integer> combRecherche) {
+		this.combRecherche = combRecherche;
+	}
+
+	public ArrayList<Integer> getCombConfirm() {
+		return combConfirm;
+	}
+
+	public void setCombConfirm(ArrayList<Integer> combConfirm) {
+		this.combConfirm = combConfirm;
+	}
+
+	public int getChiffre() {
+		return chiffre;
+	}
+
+	public void setChiffre(int chiffre) {
+		this.chiffre = chiffre;
+	}
+
+	public int getNbcase() {
+		return nbcase;
+	}
+
+	public void setNbcase(int nbcase) {
+		this.nbcase = nbcase;
+	}
+
+	public int getNbc() {
+		return nbc;
+	}
+
+	public void setNbc(int nbc) {
+		this.nbc = nbc;
+	}
+
+	public int getExistep() {
+		return existep;
+	}
+
+	public void setExistep(int existep) {
+		this.existep = existep;
+	}
+
+	public int getEmp() {
+		return emp;
+	}
+
+	public void setEmp(int emp) {
+		this.emp = emp;
+	}
+
+	public int getConfp() {
+		return confp;
+	}
+
+	public void setConfp(int confp) {
+		this.confp = confp;
+	}
+
+	public int getDoublep() {
+		return doublep;
+	}
+
+	public void setDoublep(int doublep) {
+		this.doublep = doublep;
+	}
+	
 }

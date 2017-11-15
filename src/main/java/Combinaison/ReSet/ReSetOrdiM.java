@@ -41,11 +41,11 @@ public class ReSetOrdiM implements ReSet {
 
 		if (m == Mode.Challenger || m == Mode.Duel && statut == Statut.Start) {
 			for (int j = 0; j < c.getNbCase(); j++) {
-				c.getComb().set(j, (int) (Math.random() * (c.chiffre - 0 + 1) + 0));
+				c.getComb().set(j, (int) (Math.random() * (c.getChiffre() - 0 + 1) + 0));
 			}
 		} else {
 			this.IA.Combi();
-			c.setComb(this.IA.combRecherche);
+			c.setComb(this.IA.getCombRecherche());
 		}
 
 	}
@@ -64,7 +64,7 @@ public class ReSetOrdiM implements ReSet {
 
 		this.IA.CalculNbc();
 
-		if (this.IA.existe.size() + this.IA.confirme.size() != this.IA.nbcase) {
+		if (this.IA.getExiste().size() + this.IA.getConfirme().size() != this.IA.getNbcase()) {
 
 			//Vérifie si une couleur existe
 			this.IA.VerifCouleur(l.get(0), l.get(1));
@@ -103,12 +103,12 @@ public class ReSetOrdiM implements ReSet {
 		//L'IA recherche la meilleure combinaison possible après les traitements précédents
 		this.IA.Combi();
 		logger.debug("Positions possibles : ");
-		for (int j = 0; j < this.IA.position.size(); j++) {
+		for (int j = 0; j < this.IA.getPosition().size(); j++) {
 			
-			logger.debug(this.IA.position.get(j));
+			logger.debug(this.IA.getPosition().get(j));
 		}
 		//Modifie la combinaison à utiliser dans le jeu
-		c.setComb(this.IA.combRecherche);
+		c.setComb(this.IA.getCombRecherche());
 
 	}
 }
