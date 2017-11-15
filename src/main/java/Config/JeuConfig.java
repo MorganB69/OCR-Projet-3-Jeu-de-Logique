@@ -35,16 +35,28 @@ public class JeuConfig {
 
 		Serial s = new Serial("src/main/resources", "/config.properties");
 
-		ArrayList<Parametres> list = new ArrayList<Parametres>();
-		list.add(new Parametres(12, 5, 5, false));
-		s.Ecriture(list);
+		//ArrayList<Parametres> list = new ArrayList<Parametres>();
+		//list.add(new Parametres(12, 5, 5, false));
+		//s.Ecriture(list);
+		
+		ArrayList<Integer> listrecup = new ArrayList<Integer>();
+		listrecup=s.LectureTest();
 
+		this.essai=listrecup.get(2);
+		this.nbCase=listrecup.get(3);
+		this.chiffre=listrecup.get(4);
+		if(listrecup.get(5)==1)
+			this.dev=true;
+		else this.dev=false;
+		
+		
+		/*
 		ArrayList<Parametres> listrecup = new ArrayList<Parametres>();
 		listrecup = s.LectureTest();
 		this.essai = listrecup.get(0).essai;
 		this.nbCase = listrecup.get(0).nbCase;
 		this.chiffre = listrecup.get(0).chiffre;
-		this.dev = listrecup.get(0).dev;
+		this.dev = listrecup.get(0).dev;*/
 	}
 
 }

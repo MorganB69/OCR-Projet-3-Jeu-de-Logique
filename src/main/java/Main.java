@@ -104,7 +104,7 @@ public class Main {
 				if (args[0].equals("d")) {
 					jeu.dev = true;
 					ThreadContext.put("Dev", jeu.dev.toString());
-					logger.info("mode développeur activé");
+					logger.info("mode dev : ON");
 					
 				} else
 					System.out.println(args[0]);
@@ -112,7 +112,7 @@ public class Main {
 				if (jeu.dev == true) {
 					
 					ThreadContext.put("Dev", jeu.dev.toString());
-					logger.info("mode développeur activé");
+					logger.info("mode dev : ON");
 					}
 				
 				else {
